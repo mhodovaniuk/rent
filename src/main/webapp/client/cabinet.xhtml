@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:func="http://rent.com/functions">
+<h:body>
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+        <ui:define name="content">
+        <p:dataTable id="cabinetDataTable" var="order" value="#{clientCabinetMB.userOrders}" paginator="true" rows="5"
+                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15">
+            <p:column> <h:form>
+                <p:panelGrid>
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="2">
+                                <h:outputFormat value="#{texts.orderDescription}">
+                                    <f:param value="#{order.id}"/>
+                                    <f:param value="#{func:formatDate(order.creatingDate)}"/>
+                                    <f:param value="#{clientCabinetMB.getAcceptedPaymentsSum(order)}"/>
+                                    <f:param value="#{clientCabinetMB.getTotalCost(order)}"/>
+                                </h:outputFormat>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>#{texts.orderPart}</p:column>
+                            <p:column>#{texts.payment}</p:column>
+                        </p:row>
+                    </f:facet>
+                    <p:row>
+                        <p:column>
+                            <p:dataTable value="#{order.orderParts}" var="part">
+                                <p:column>
+                                    <h:outputFormat value="#{texts.orderPartDescription}">
+                                        <f:param value="#{part.id}"/>
+                                        <f:param value="#{part.area.number}"/>
+                                        <f:param value="#{func:formatDate(part.startDate)}"/>
+                                        <f:param value="#{func:formatDate(part.endDate)}"/>
+                                        <f:param value="#{part.totalCost}"/>
+                                    </h:outputFormat>
+                                </p:column>
+                            </p:dataTable>
+                        </p:column>
+                        <p:column id="paymnetColumn">
+                            <p:dataTable var="payment" value="#{order.payments}">
+                                <p:column headerText="#{texts.id}">#{payment.id}</p:column>
+                                <p:column headerText="#{texts.date}">
+                                    <h:outputText value="#{payment.date}">
+                                        <f:convertDateTime type="date" pattern="d/M/yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="#{texts.value}">#{payment.value}</p:column>
+                                <p:column headerText="#{texts.details}">#{payment.details}</p:column>
+                                <p:column headerText="#{texts.accepted}"><p:graphicImage value="/resources/img/true.png"
+                                                                                         rendered="#{payment.accepted}"
+                                                                                         width="32"
+                                                                                         height="32"/></p:column>
+                            </p:dataTable>
+                            <h:form>
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel for="dateInput" value="#{texts.date}"/>
+                                    <p:calendar id="dateInput" value="#{clientCabinetMB.newPayment.date}"
+                                                pattern="d/M/yyyy" required="true"
+                                                requiredMessage="#{texts.emptyFieldERR}" showOn="button">
+                                        <f:convertDateTime pattern="d/M/yyyy"/>
+                                    </p:calendar>
+                                    <p:outputLabel for="valueInput" value="#{texts.value}"/>
+                                    <p:spinner id="valueInput" value="#{clientCabinetMB.newPayment.value}" prefix="$" min="0" validatorMessage="#{texts.fieldFormatERR}"
+                                               required="true"
+                                               requiredMessage="#{texts.emptyFieldERR}" stepFactor="0.01"/>
+                                    <p:outputLabel for="details" value="#{texts.details}"/>
+                                    <p:inputText id="details" maxlength="128" value="#{clientCabinetMB.newPayment.details}"/>
+                                </p:panelGrid>
+                                <p:commandButton actionListener="#{clientCabinetMB.addPayment(order)}" value="#{texts.add}"
+                                                 update=":cabinetDataTable"/>
+                            </h:form>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </h:form>
+            </p:column>
+        </p:dataTable>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

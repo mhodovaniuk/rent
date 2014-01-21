@@ -1,0 +1,4 @@
+<jboss-web>
+    <context-root>rent</context-root>
+    <security-domain>rent-security-domain</security-domain>
+</jboss-web>

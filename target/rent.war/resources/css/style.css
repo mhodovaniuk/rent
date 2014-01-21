@@ -1,0 +1,35 @@
+#page {
+    width: 1280px;
+    height: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(74, 240, 62, 0.24);
+}
+
+#topDisplay{
+    width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#topMenu{
+    position: relative;
+    margin:auto auto;
+    width: 90%;
+    /*width: 800px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+}
+.form {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#topItem{
+    float: left;
+}
+#menuButton{
+
+}
+

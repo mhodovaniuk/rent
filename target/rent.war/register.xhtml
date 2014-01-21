@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition template="WEB-INF/templates/template.xhtml">
+
+        <ui:define name="content">
+            <h:form id="registerForm" styleClass="form">
+                <p:messages globalOnly="true"/>
+                <h:panelGrid columns="3">
+                    <p:outputLabel for="emailInput" value="#{texts.email}"/>
+                    <p:inputText id="emailInput" value="#{userMB.user.email}" required="true"
+                                 requiredMessage="#{texts.emptyFieldERR}">
+                        <f:validator binding="#{emailValidator}"/>
+                    </p:inputText>
+                    <p:message for="emailInput" styleClass="errorMessage"/>
+
+                    <p:outputLabel for="passwordInput" value="#{texts.password}"/>
+                    <p:password id="passwordInput" value="#{userMB.user.password}" required="true"
+                                requiredMessage="#{texts.emptyFieldERR}">
+                        <f:validator validatorId="passwordValidator"/>
+                        <f:attribute name="password2" value="#{password2}"/>
+                    </p:password>
+                    <p:message for="passwordInput" styleClass="errorMessage"/>
+
+                    <p:outputLabel for="passwordInput2" value="#{texts.passwordConfirm}"/>
+                    <p:password id="passwordInput2" binding="#{password2}" required="true"
+                                requiredMessage="#{texts.emptyFieldERR}"/>
+                    <p:message for="passwordInput2" styleClass="errorMessage"/>
+
+                    <p:outputLabel for="companyNameInput" value="#{texts.companyName}"/>
+                    <p:inputText id="companyNameInput" value="#{userMB.user.userDescription.companyName}" required="true"
+                                 requiredMessage="#{texts.emptyFieldERR}"/>
+                    <p:message for="companyNameInput" styleClass="errorMessage"/>
+
+                    <p:outputLabel for="contactPersonNameInput" value="#{texts.contactPerson}"/>
+                    <p:inputText id="contactPersonNameInput" value="#{userMB.user.userDescription.contactPersonName}"
+                                 required="true" requiredMessage="#{texts.emptyFieldERR}"/>
+                    <p:message for="contactPersonNameInput" styleClass="errorMessage"/>
+
+                    <p:outputLabel for="phoneInput" value="#{texts.phone}"/>
+                    <p:inputText id="phoneInput" value="#{userMB.user.userDescription.phone}" required="true"
+                                 requiredMessage="#{texts.emptyFieldERR}"/>
+                    <p:message for="phoneInput" styleClass="errorMessage"/>
+
+                    <p:outputLabel for="countryInput" value="#{texts.country}"/>
+                    <p:inputText id="countryInput" value="#{userMB.user.userDescription.address.country}" required="true"
+                                 requiredMessage="#{texts.emptyFieldERR}"/>
+                    <p:message for="countryInput" styleClass="errorMessage"/>
+
+                    <p:outputLabel for="cityInput" value="#{texts.city}"/>
+                    <p:inputText id="cityInput" value="#{userMB.user.userDescription.address.city}" required="true"
+                                 requiredMessage="#{texts.emptyFieldERR}"/>
+                    <p:message for="cityInput" styleClass="errorMessage"/>
+
+                    <p:outputLabel for="streetInput" value="#{texts.street}"/>
+                    <p:inputText id="streetInput" value="#{userMB.user.userDescription.address.street}" required="true"
+                                 requiredMessage="#{texts.emptyFieldERR}"/>
+                    <p:message for="streetInput" styleClass="errorMessage"/>
+
+                    <p:outputLabel for="buildingInput" value="#{texts.building}"/>
+                    <p:inputText id="buildingInput" value="#{userMB.user.userDescription.address.building}" required="true"
+                                 requiredMessage="#{texts.emptyFieldERR}"/>
+                    <p:message for="buildingInput" styleClass="errorMessage"/>
+
+                    <p:outputLabel for="detailsInput" value="#{texts.details}"/>
+                    <p:inputTextarea id="detailsInput" value="#{userMB.user.userDescription.details}"/>
+                    <p:message for="detailsInput" styleClass="errorMessage"/>
+                </h:panelGrid>
+                <p:commandButton value="#{texts.register}" action="#{userMB.doRegister()}" update="registerForm"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

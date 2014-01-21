@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"  >
+<h:body>
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+        <ui:define name="content">
+        <h:form id="cart">
+            <p:dataTable id="cartDataTable" var="part" value="#{cartMB.order.orderParts}" paginator="true" rows="5"
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                <p:column headerText="#{texts.plan}">
+                    <p:graphicImage value="#{part.area.imagePath}" width="150" height="100"/>
+                </p:column>
+                <p:column headerText="#{texts.number}">
+                    <h:outputText value="#{part.area.number}"/>
+                </p:column>
+                <p:column headerText="#{texts.floor}">
+                    <h:outputText value="#{part.area.floor}"/>
+                </p:column>
+                <p:column headerText="#{texts.square}">
+                    <h:outputText value="#{part.area.square}"/>
+                </p:column>
+                <p:column headerText="#{texts.rent}">
+                    <h:outputText value="#{part.totalCost}"/>
+                </p:column>
+                <p:column headerText="#{texts.aircondition}">
+                    <p:graphicImage value="/resources/img/true.png" rendered="#{part.area.airCondition}" width="32" height="32"/>
+                </p:column>
+                <p:column headerText="#{texts.startDate}">
+                    <h:outputText value="#{part.startDate}">
+                        <f:converter converterId="myDateConverter"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{texts.endDate}">
+                    <h:outputText value="#{part.endDate}">
+                        <f:converter converterId="myDateConverter"/>
+                    </h:outputText>
+                </p:column>
+                <p:column>
+                    <p:commandButton value="#{texts.delete}" actionListener="#{cartMB.doRemoveOrderPartFromOrder(part)}" update=":cart"/>
+                </p:column>
+            </p:dataTable>
+            <h:panelGroup columns="2">
+                <p:outputLabel for="detailsInput" value="#{texts.details}"/>
+                <p:inputTextarea id="detailsInput" value="#{cartMB.order.details}"/><br/>
+            </h:panelGroup>
+            <h:outputText value="#{texts.totalCost}: #{cartMB.cost}"/><br/>
+            <p:commandButton value="#{texts.doRent}" action="#{cartMB.doCompleteOrder()}"/>
+        </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

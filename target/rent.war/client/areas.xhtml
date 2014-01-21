@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+        <ui:define name="content">
+        <h:form styleClass="form">
+            <h:panelGrid columns="2">
+                <p:outputLabel for="inputAreaNumber" value="#{texts.areaNumber}"/>
+                <p:inputText id="inputAreaNumber" value="#{areasMB.areaNumber}" />
+                <div></div>
+                <h:panelGroup>
+                    <p:commandButton update=":viewDataTable" value="#{texts.search}"/>/
+                    <p:commandButton update=":viewDataTable" value="#{texts.viewAll}" actionListener="#{areasMB.cleanAreaNumber()}"/>
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:form>
+        <p:dataTable id="viewDataTable" var="area" value="#{areasMB.dataModel}" paginator="true" rows="5"
+                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15" lazy="true">
+            <p:column headerText="#{texts.plan}">
+                <p:graphicImage value="#{area.imagePath}" width="150" height="100"/>
+            </p:column>
+            <p:column headerText="#{texts.areaNumber}">
+                <h:outputText value="#{area.number}"/>
+            </p:column>
+            <p:column headerText="#{texts.floor}">
+                <h:outputText value="#{area.floor}"/>
+            </p:column>
+            <p:column headerText="#{texts.square}">
+                <h:outputText value="#{area.square}"/>
+            </p:column>
+            <p:column headerText="#{texts.rent}">
+                <h:outputText value="#{area.rent}"/>
+            </p:column>
+            <p:column headerText="#{texts.aircondition}">
+                <p:graphicImage value="/resources/img/true.png" rendered="#{area.airCondition}" width="32"
+                                height="32"/>
+            </p:column>
+            <p:column headerText="#{texts.lastRentMonth}">
+                <h:outputText value="#{areasMB.getGetLastRentMonth(area)}"/>
+            </p:column>
+        </p:dataTable>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
