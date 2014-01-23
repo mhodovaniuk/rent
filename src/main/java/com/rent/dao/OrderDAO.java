@@ -1,6 +1,7 @@
 package com.rent.dao;
 
 import com.rent.entity.Order;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

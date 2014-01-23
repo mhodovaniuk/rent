@@ -23,6 +23,12 @@ public class PasswordValidator implements Validator {
         String password2=(String)uiPassword2.getSubmittedValue();
         if (password==null || password.isEmpty() || password2==null || password2.isEmpty())
             return;
+        if (password.length()<6 || password.length()>16){
+            uiPassword2.setValid(false);
+            String messageText=ResourceBundle.getBundle("i18n/texts",facesContext.getViewRoot().getLocale()).getString("passwordLengthERR");
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,messageText,messageText));
+        }
+
         if (!password.equals(password2)){
             uiPassword2.setValid(false);
             String messageText=ResourceBundle.getBundle("i18n/texts",facesContext.getViewRoot().getLocale()).getString("passwordsMatchERR");

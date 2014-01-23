@@ -39,6 +39,7 @@ public class RentMB implements Serializable {
         dataModel =new LazyDataModel<Area>() {
             @Override
             public List<Area> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, String> filters) {
+                setRowCount(areaDAO.findAreasCount(searchDTO));
                 return areaDAO.search(first,pageSize,searchDTO);
             }
         };

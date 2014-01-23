@@ -1,35 +1,72 @@
 #page {
     width: 1280px;
-    height: 1024px;
-    margin-left: auto;
-    margin-right: auto;
+    height: 1680px;
+    margin: auto;
     background-color: rgba(74, 240, 62, 0.24);
 }
 
-#topDisplay{
-    width: 1280px;
+
+#topMenu {
+    display: table;
+    width: 75%;
+    margin: auto;
+    border-spacing: 10px 10px;
+}
+
+.menuButton{
+    text-align: center;
+    display: table-cell;
+    padding: 10px;
+}
+
+#logoDiv {
+    width: 25%;
+    padding-right: 90px;
+    padding-top: 10px;
+}
+
+#phoneDiv {
+    text-align: center;
+    width: 35%;
+    padding-right: 20px;
+}
+
+#languageDiv {
+    text-align: center;
+    width: 10%;
+}
+
+#userDiv {
+
+    width: 25%;
+    padding-left: 25px;
+}
+
+#logoDiv, #phoneDiv, #languageDiv, #userDiv{
+    vertical-align: middle;
+    display: table-cell;
+}
+#topContainer{
+    margin: 0 auto;
+    display: table;
+}
+
+.centeredDiv{
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
+}
+.button{
+    margin-top: 20px;
+    margin-left: 5px;
+}
+.inputText{
+    width: 10em;
 }
 
-
-#topMenu{
-    position: relative;
-    margin:auto auto;
-    width: 90%;
-    /*width: 800px;*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-}
-.form {
-    width: 800px;
+.form{
+    width: 700px;
     margin-left: auto;
     margin-right: auto;
-}
-#topItem{
-    float: left;
-}
-#menuButton{
-
 }
 

@@ -24,7 +24,17 @@ import java.util.ResourceBundle;
 public class UserMB implements Serializable {
     private static final Locale DEFAULT_LOCALE=Locale.forLanguageTag("ua");
     private static final Map<String,Locale> LOCALES =new HashMap<String, Locale>();
+
+    public User getRegDTOUser() {
+        return regDTOUser;
+    }
+
+    public void setRegDTOUser(User regDTOUser) {
+        this.regDTOUser = regDTOUser;
+    }
+
     //param
+    private User regDTOUser;
     private String userEmail;
     private String userPassword;
 
@@ -76,14 +86,15 @@ public class UserMB implements Serializable {
 
     @PostConstruct
     public void init(){
-        user=new User();
+        regDTOUser=new User();
         setLocale(DEFAULT_LOCALE);
     }
 
     public String doRegister() {
-        userDAO.persist(user);
-        user=null;
-        return "login";
+        userDAO.persist(regDTOUser);
+        String messageText= ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("regMSG");
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", messageText));
+        return "home";
     }
 
     public String doLogin() {
@@ -95,7 +106,7 @@ public class UserMB implements Serializable {
             user=userDAO.findByEmail(userEmail);
         } catch (ServletException e) {
             String messageText= ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("loginERR");
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,messageText,messageText));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"",messageText));
             return "login";
         }
         return "home";

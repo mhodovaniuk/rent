@@ -19,7 +19,7 @@ public class SearchDTO {
     }
 
     public Integer getFromFloor() {
-        return fromFloor;
+        return null;
     }
 
     public void setFromFloor(Integer fromFloor) {
@@ -51,7 +51,7 @@ public class SearchDTO {
 
     public Integer getToFloor() {
 
-        return toFloor;
+        return null;
     }
 
     public void setToFloor(Integer toFloor) {
@@ -59,7 +59,7 @@ public class SearchDTO {
     }
 
     public Double getFromSquare() {
-        return fromSquare;
+        return null;
     }
 
     public void setFromSquare(Double fromSquare) {
@@ -67,7 +67,7 @@ public class SearchDTO {
     }
 
     public Double getToSquare() {
-        return toSquare;
+        return null;
     }
 
     public void setToSquare(Double toSquare) {
@@ -75,7 +75,7 @@ public class SearchDTO {
     }
 
     public BigDecimal getFromRent() {
-        return fromRent;
+        return null;
     }
 
     public void setFromRent(BigDecimal fromRent) {
@@ -85,7 +85,7 @@ public class SearchDTO {
 
 
     public BigDecimal getToRent() {
-        return toRent;
+        return null;
     }
 
     public BigDecimal getRealToRent() {

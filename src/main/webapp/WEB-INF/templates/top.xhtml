@@ -9,54 +9,54 @@
       xmlns:p="http://primefaces.org/ui">
 <body>
 <ui:composition>
-
-        <span><h:graphicImage id="logoDiv" styleClass="topItem" value="/resources/img/pinguin.png"/></span>
-        <span id="phoneDiv" class="topItem">
-            <h:outputText value="#{texts.phoneInfo}"/><br/>
-            <span id="phoneSpan">+38(067)890-26-99</span>
-        </span>
-        <span id="languageDiv" class="topItem">
-            <h:form>
-                <h:commandLink action="#{userMB.doChangeLanguage('EN')}" value="EN"/><br/>
-                <h:commandLink action="#{userMB.doChangeLanguage('UA')}" value="UA"/>
-            </h:form>
-        </span>
-        <span id="userDiv" class="topItem">
-            <c:choose>
-                <c:when test="#{request.userPrincipal eq null}">
-                    <h:link value="#{texts.login}" outcome="/login"/> <br/>
-                    <h:link value="#{texts.register}" outcome="/register"/>
-                </c:when>
-                <c:when test="#{request.userPrincipal ne null}">
-                    <h:outputFormat value="#{texts.hello}">
-                        <f:param value="#{userMB.user.email}"/>
-                    </h:outputFormat>
-                    <br/>
-                    <h:outputFormat value="#{texts.cartInfo}" id="cartDisplay">
-                        <f:param value="#{cartMB.order.orderParts.size()}"/>
-                    </h:outputFormat>
-                    <h:form>
-                        <p:commandButton value="#{texts.doRent}" action="cart"/>
-                    </h:form>
-                    <h:form>
-                        <p:commandLink value="#{texts.logout}" action="#{userMB.doLogout()}"/>
-                    </h:form>
-                    <h:form>
-
-                    </h:form>
-                </c:when>
-            </c:choose>
-        </span>
-    <div id="topMenu">
-        <h:link styleClass="menuButton" value="#{texts.mainPage}" outcome="/index"/>
-        <h:link styleClass="menuButton" value="#{texts.rentPage}" outcome="/client/rent"/>
-        <h:link styleClass="menuButton" value="#{texts.cabinetPage}" outcome="/client/cabinet"
-                rendered="#{facesContext.externalContext.isUserInRole('CLIENT')}"/>
-        <h:link styleClass="menuButton" value="#{texts.cabinetPage}" outcome="/admin/cabinet"
-                rendered="#{facesContext.externalContext.isUserInRole('ADMIN')}"/>
-        <h:link styleClass="menuButton" value="#{texts.areasPage}" outcome="/client/areas"/>
-        <h:link styleClass="menuButton" value="#{texts.aboutPage}" outcome="/about"/>
+    <div id="topContainer">
+            <div id="logoDiv" class="topItem">
+                <h:graphicImage value="/resources/img/pinguin.png" height="240" width="190"/>
+            </div>
+            <div id="phoneDiv" class="topItem">
+                <h:outputText value="#{texts.phoneInfo}"/><br/>
+                <span id="phoneSpan">+38(067)890-26-99</span>
+            </div>
+            <div id="languageDiv" class="topItem">
+                <h:form>
+                    <h:commandLink action="#{userMB.doChangeLanguage('EN')}" value="EN"/><br/>
+                    <h:commandLink action="#{userMB.doChangeLanguage('UA')}" value="UA"/>
+                </h:form>
+            </div>
+            <div id="userDiv" class="topItem">
+                <c:choose>
+                    <c:when test="#{request.userPrincipal eq null}">
+                        <h:link value="#{texts.login}" outcome="/login"/> <br/>
+                        <h:link value="#{texts.register}" outcome="/register"/>
+                    </c:when>
+                    <c:when test="#{request.userPrincipal ne null}">
+                        <h:outputFormat value="#{texts.hello}">
+                            <f:param value="#{userMB.user.email}"/>
+                        </h:outputFormat>
+                        <br/>
+                        <h:outputFormat value="#{texts.cartInfo}" id="cartDisplay">
+                            <f:param value="#{cartMB.order.orderParts.size()}"/>
+                        </h:outputFormat>
+                        <h:form>
+                            <p:commandButton value="#{texts.doRent}" action="cart"/>
+                        </h:form>
+                        <h:form>
+                            <p:commandLink value="#{texts.logout}" action="#{userMB.doLogout()}"/>
+                        </h:form>
+                    </c:when>
+                </c:choose>
+            </div>
     </div>
+        <div id="topMenu">
+            <h:link styleClass="menuButton" value="#{texts.mainPage}" outcome="/index"/>
+            <h:link styleClass="menuButton" value="#{texts.rentPage}" outcome="/client/rent"/>
+            <h:link styleClass="menuButton" value="#{texts.cabinetPage}" outcome="/client/cabinet"
+                    rendered="#{facesContext.externalContext.isUserInRole('CLIENT')}"/>
+            <h:link styleClass="menuButton" value="#{texts.cabinetPage}" outcome="/admin/cabinet"
+                    rendered="#{facesContext.externalContext.isUserInRole('ADMIN')}"/>
+            <h:link styleClass="menuButton" value="#{texts.areasPage}" outcome="/client/areas"/>
+            <h:link styleClass="menuButton" value="#{texts.aboutPage}" outcome="/about"/>
+        </div>
 </ui:composition>
 </body>
 </html>

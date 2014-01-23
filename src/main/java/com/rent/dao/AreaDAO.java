@@ -62,4 +62,12 @@ public class AreaDAO extends BaseDAO<Area> {
     public long findAreasCount(){
         return em.createNamedQuery("Area.findAreasCount",Long.class).getSingleResult();
     }
+
+    public int findAreasCount(SearchDTO dto) {
+        TypedQuery<Long> query = em.createNamedQuery("Area.findSearchedAreasCount", Long.class);
+        return query.setParameter("fromFloor", dto.getRealFromFloor()).setParameter("toFloor", dto.getRealToFloor())
+                .setParameter("fromSquare", dto.getRealFromSquare()).setParameter("toSquare", dto.getRealToSquare())
+                .setParameter("fromRent", dto.getRealFromRent()).setParameter("toRent", dto.getRealToRent())
+                .setParameter("aircondition", dto.getRealAircondition()).getSingleResult().intValue();
+    }
 }
