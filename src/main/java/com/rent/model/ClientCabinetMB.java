@@ -5,22 +5,37 @@ import com.rent.dao.PaymentDAO;
 import com.rent.entity.Order;
 import com.rent.entity.OrderPart;
 import com.rent.entity.Payment;
+import org.primefaces.context.RequestContext;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mykhailo on 1/6/14.
  */
 @Named
-@RequestScoped
+@SessionScoped
 public class ClientCabinetMB implements Serializable{
+    private Order selectedOrder;
+
+    public Order getSelectedOrder() {
+//        System.out.println("get " + this + selectedOrder);
+        return selectedOrder;
+    }
+
+    public void setSelectedOrder(Order selectedOrder) {
+//        System.out.println("set " + this + selectedOrder);
+        this.selectedOrder = selectedOrder;
+    }
+
     @Inject
     private UserMB userMB;
     @EJB
@@ -65,4 +80,6 @@ public class ClientCabinetMB implements Serializable{
         newPayment.setOrder(order);
         paymentDAO.persist(newPayment);
     }
+
+
 }

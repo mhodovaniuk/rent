@@ -119,7 +119,6 @@ public class UserMB implements Serializable {
         try {
             request.logout();
             user=null;
-
             return "login";
         } catch (ServletException e) {
             String messageText= ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("logoutERR");
