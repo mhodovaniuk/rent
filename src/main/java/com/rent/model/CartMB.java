@@ -13,7 +13,6 @@ import javax.ejb.EJB;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -62,13 +61,13 @@ public class CartMB implements Serializable {
         return orderPart;
     }
 
-    public void doVerifyAndAddOrderPartToOrder() {
+    public void doVerifyAndAddOrderPart() {
         RequestContext requestContext = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         boolean addedStatus = true;
         String areaInCartERR = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("areaInCartERR");
         String datesERR = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("datesERR");
-        String added = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("added");
+        String added = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("addedArea");
         String error = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("warning");
         String warning = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("error");
         String orderPartLenERR = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("orderPartLenERR");
@@ -126,7 +125,7 @@ public class CartMB implements Serializable {
         }
         msg=new FacesMessage(severity,"",msgStr);
         FacesContext.getCurrentInstance().addMessage(null, msg);
-
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         return "rent";
     }
 
@@ -138,6 +137,7 @@ public class CartMB implements Serializable {
     }
 
     public void doChooseArea(Area area) {
+
         orderPart.setArea(area);
     }
 

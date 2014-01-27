@@ -14,6 +14,7 @@
             <p:dataTable id="cartDataTable" var="part" value="#{cartMB.order.orderParts}" paginator="true" rows="5"
                          paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15">
+                <f:facet name="header">#{texts.totalCost}: #{cartMB.cost}</f:facet>
                 <p:column headerText="#{texts.plan}">
                     <p:graphicImage value="#{part.area.imagePath}" width="150" height="100"/>
                 </p:column>
@@ -46,12 +47,12 @@
                     <p:commandButton value="#{texts.delete}" actionListener="#{cartMB.doRemoveOrderPartFromOrder(part)}" update=":cart"/>
                 </p:column>
             </p:dataTable>
-            <h:panelGroup columns="2">
-                <p:outputLabel for="detailsInput" value="#{texts.details}"/>
-                <p:inputTextarea id="detailsInput" value="#{cartMB.order.details}"/><br/>
-            </h:panelGroup>
-            <h:outputText value="#{texts.totalCost}: #{cartMB.cost}"/><br/>
-            <p:commandButton value="#{texts.doRent}" action="#{cartMB.doCompleteOrder()}"/>
+            <div class="centeredDiv">
+                <p:outputLabel for="detailsInput" value="#{texts.details}" styleClass="label"/><br/>
+                <p:inputTextarea id="detailsInput" value="#{cartMB.order.details}" rows="5"
+                                 cols="60" autoResize="false"/>
+            </div>
+            <p:commandButton value="#{texts.doRent}" action="#{cartMB.doCompleteOrder()}" styleClass="button"/>
         </h:form>
         </ui:define>
     </ui:composition>

@@ -9,28 +9,21 @@
       xmlns:p="http://primefaces.org/ui">
 <h:body>
     <ui:composition template="/WEB-INF/templates/template.xhtml">
-
         <ui:define name="content">
-
             <h:form id="loginForm" styleClass="form">
-                <p:messages globalOnly="true" showDetail="true" styleClass="errorMessages"/>
                 <h:panelGrid columns="3">
-                    <p:outputLabel for="emailInput" value="#{texts.email}"/>
+                    <p:outputLabel for="emailInput" value="#{texts.email}" styleClass="label"/>
                     <p:inputText id="emailInput" value="#{userMB.userEmail}"
-                                 required="true" requiredMessage="#{texts.emptyFieldERR}">
-
-                    </p:inputText>
+                                 required="true" requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField"/>
                     <p:message for="emailInput"/>
-                    <p:outputLabel for="passwordInput" value="#{texts.password}"/>
+                    <p:outputLabel for="passwordInput" value="#{texts.password}" styleClass="label"/>
                     <p:password id="passwordInput" value="#{userMB.userPassword}"
-                                required="true" requiredMessage="#{texts.emptyFieldERR}">
-                    </p:password>
+                                required="true" requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField"/>
                     <p:message for="passwordInput"/>
                 </h:panelGrid>
-                <p:commandButton value="#{texts.login}" action="#{userMB.doLogin()}" update="loginForm"
-                                 styleClass="button"/>
+                <p:commandButton value="#{texts.login}" action="#{userMB.doLogin()}"
+                                 update="loginForm" styleClass="button"/>
             </h:form>
-
         </ui:define>
     </ui:composition>
 </h:body>

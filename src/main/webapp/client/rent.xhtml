@@ -10,10 +10,11 @@
 <h:body>
     <ui:composition template="/WEB-INF/templates/template.xhtml">
         <ui:define name="content">
+
             <h:outputScript library="js" name="dialog.js"/>
-            <p:growl id="growl" showDetail="true" sticky="true" life="3000" globalOnly="true"/>
-                <p:dialog header="#{texts.monthsOfRent}" widgetVar="dlg" resizable="false" id="dlgid">
-                    <h:form id="dialogForm">
+<h:outputText value="1212312" rendered="#{request.userPrincipal eq null}"/>
+            <p:dialog header="#{texts.monthsOfRent}" widgetVar="dlg" resizable="false" id="dlgid">
+                <h:form id="dialogForm">
                     <h:panelGrid columns="2">
                         <p:outputLabel for="startDateInput" value="#{texts.chooseFirstDayOfMonth}"/>
                         <p:calendar id="startDateInput" value="#{cartMB.orderPart.startDate}" showOn="button"
@@ -29,72 +30,84 @@
                         </p:calendar>
                     </h:panelGrid>
                     <p:commandButton id="okButton" value="#{texts.ok}"
-                                     actionListener="#{cartMB.doVerifyAndAddOrderPartToOrder()}"
-                                     update=":#{p:component('cartDisplay')},:growl" oncomplete="handleLoginRequest(xhr, status, args)"/>
-
-
-                    <p:commandButton id="cancelButton" value="#{texts.cancel}" update=":dialogForm"
+                                     actionListener="#{cartMB.doVerifyAndAddOrderPart()}"
+                                     update=":#{p:component('cartDisplay')}"
+                                     oncomplete="handleLoginRequest(xhr, status, args)"/>
+                    <p:commandButton  id="cancelButton" value="#{texts.cancel}" update=":dialogForm"
                                      oncomplete="PF('dlg').hide();"/>
-                    </h:form>
-                </p:dialog>
+                </h:form>
+            </p:dialog>
 
 
             <h:form id="search" styleClass="form">
                 <h:panelGrid columns="2">
-                    <p:outputLabel for="floorInput" value="#{texts.floor}"/>
+                    <p:outputLabel for="floorInput" value="#{texts.floor}" styleClass="label"/>
                     <h:panelGroup id="floorInput">
-                        <p:inputText id="fromFloorInput" value="#{rentMB.searchDTO.fromFloor}"/>
-                        <p:inputText id="toFloorInput" value="#{rentMB.searchDTO.toFloor}"/>
+                        <p:inputText id="fromFloorInput" value="#{rentMB.searchDTO.fromFloor}" styleClass="inputField"/>
+                        <p:watermark value="#{texts.from}" for="fromFloorInput"/>
+                        <p:inputText id="toFloorInput" value="#{rentMB.searchDTO.toFloor}" styleClass="inputField"/>
+                        <p:watermark value="#{texts.to}" for="toFloorInput"/>
                     </h:panelGroup>
-                    <p:outputLabel for="rentInput" value="#{texts.rent}"/>
+                    <p:outputLabel for="rentInput" value="#{texts.rent}" styleClass="label"/>
                     <h:panelGroup id="rentInput">
-                        <p:inputText id="fromRentInput" value="#{rentMB.searchDTO.fromRent}"/>
-                        <p:inputText id="toRentInput" value="#{rentMB.searchDTO.toRent}"/>
+                        <p:inputText id="fromRentInput" value="#{rentMB.searchDTO.fromRent}" styleClass="inputField"/>
+                        <p:watermark value="#{texts.from}" for="fromRentInput"/>
+                        <p:inputText id="toRentInput" value="#{rentMB.searchDTO.toRent}" styleClass="inputField"/>
+                        <p:watermark value="#{texts.to}" for="toRentInput"/>
                     </h:panelGroup>
-                    <p:outputLabel for="squareInput" value="#{texts.square}"/>
+                    <p:outputLabel for="squareInput" value="#{texts.square}" styleClass="label"/>
                     <h:panelGroup id="squareInput">
-                        <p:inputText id="fromSquareInput" value="#{rentMB.searchDTO.fromSquare}"/>
-                        <p:inputText id="toSquareInput" value="#{rentMB.searchDTO.toSquare}"/>
+                        <p:inputText id="fromSquareInput" value="#{rentMB.searchDTO.fromSquare}" styleClass="inputField"/>
+                        <p:watermark value="#{texts.from}" for="fromSquareInput"/>
+                        <p:inputText id="toSquareInput" value="#{rentMB.searchDTO.toSquare}" styleClass="inputField"/>
+                        <p:watermark value="#{texts.to}" for="toSquareInput"/>
                     </h:panelGroup>
-                    <p:outputLabel for="aiconditionInput" value="#{texts.aircondition}"/>
-                    <p:selectOneMenu id="aiconditionInput" value="#{rentMB.searchDTO.aircondition}">
+                    <p:outputLabel for="aiconditionInput" value="#{texts.aircondition}" styleClass="label"/>
+                    <p:selectOneMenu id="aiconditionInput" value="#{rentMB.searchDTO.aircondition}" styleClass="inputField">
                         <f:selectItem itemLabel="#{texts.airconditionExists}" itemValue="#{0}"/>
                         <f:selectItem itemLabel="#{texts.airconditionNotExists}" itemValue="#{1}"/>
                         <f:selectItem itemLabel="#{texts.airconditionDontCare}" itemValue="#{2}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
-                <p:commandButton value="#{texts.search}" update=":searchDataTable"/>
+                <p:commandButton styleClass="button" value="#{texts.search}" update=":searchDataTableForm:searchDataTable"/>
             </h:form>
-            <p:dataTable id="searchDataTable" var="area" value="#{rentMB.dataModel}" paginator="true" rows="5"
-                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15" lazy="true">
-                <p:column headerText="#{texts.plan}">
-                    <p:graphicImage value="#{area.imagePath}" width="150" height="100"/>
-                </p:column>
-                <p:column headerText="#{texts.areaNumber}">
-                    <h:outputText value="#{area.number}"/>
-                </p:column>
-                <p:column headerText="#{texts.floor}">
-                    <h:outputText value="#{area.floor}"/>
-                </p:column>
-                <p:column headerText="#{texts.square}">
-                    <h:outputText value="#{area.square}"/>
-                </p:column>
-                <p:column headerText="#{texts.rent}">
-                    <h:outputText value="#{area.rent}"/>
-                </p:column>
-                <p:column headerText="#{texts.aircondition}">
-                    <p:graphicImage value="/resources/img/true.png" rendered="#{area.airCondition}" width="32"
-                                    height="32"/>
-                </p:column>
-                <p:column>
-                    <h:form>
+            <h:form id="searchDataTableForm">
+                <p:dataTable id="searchDataTable" var="area" value="#{rentMB.dataModel}" paginator="true" rows="5"
+                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15" lazy="true">
+                    <f:facet name="header">
+                        #{texts.availableAreas}
+                    </f:facet>
+
+                    <p:column headerText="#{texts.plan}">
+                        <p:graphicImage value="#{area.imagePath}" width="150" height="100"/>
+                    </p:column>
+                    <p:column headerText="#{texts.areaNumber}">
+                        <h:outputText value="#{area.number}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.floor}">
+                        <h:outputText value="#{area.floor}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.square}">
+                        <h:outputText value="#{area.square}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.rent}">
+                        <h:outputText value="#{area.rent}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.aircondition}">
+                        <p:graphicImage value="/resources/img/true.png" rendered="#{area.airCondition}" width="32"
+                                        height="32"/>
+                    </p:column>
+                    <p:column>
+
                         <p:commandButton value="#{texts.rentIt}" oncomplete="PF('dlg').show()"
                                          actionListener="#{cartMB.doChooseArea(area)}">
                         </p:commandButton>
-                    </h:form>
-                </p:column>
-            </p:dataTable>
+
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
         </ui:define>
     </ui:composition>
 </h:body>

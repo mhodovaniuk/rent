@@ -13,6 +13,7 @@
         <title>Rent</title>
     </h:head>
     <h:body>
+        <p:growl id="growl" showDetail="true" sticky="true" life="3000" globalOnly="true" autoUpdate="true"/>
         <h:outputStylesheet library="css" name="style.css"/>
         <div id="page" >
                 <ui:insert name="top">
@@ -21,6 +22,9 @@
             <div id="content" >
                 <ui:insert name="content">
 
+                </ui:insert>
+                <ui:insert name="footer">
+                    <ui:include src="footer.xhtml"/>
                 </ui:insert>
             </div>
         </div>

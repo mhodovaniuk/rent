@@ -7,6 +7,6 @@ function handleLoginRequest(xhr, status, args) {
     }
     else {
         PF('dlg').hide();
-        $('#loginLink').fadeOut();
     }
 }
+

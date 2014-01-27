@@ -45,10 +45,16 @@ public class AreaDAO extends BaseDAO<Area> {
         return query.setFirstResult(first).setMaxResults(pageSize).getResultList();
     }
 
-    public List<Area> search(String areaNumber) {
+    public List<Area> search(int first, int pageSize,String areaNumber) {
         TypedQuery<Area> query =em.createNamedQuery("Area.finByNumber", Area.class);
-        return query.setParameter("areaNumber", areaNumber).getResultList();
+        return query.setParameter("areaNumber", "%"+areaNumber+"%").setFirstResult(first).setMaxResults(pageSize).getResultList();
     }
+
+    public int searchSize(String areaNumber) {
+        TypedQuery<Long> query =em.createNamedQuery("Area.finCountAreasWithNumber", Long.class);
+        return query.setParameter("areaNumber", "%" + areaNumber + "%").getSingleResult().intValue();
+    }
+
 
     public Date findLastRentDate(Long areaId) {
         TypedQuery<Date> query =em.createNamedQuery("Area.finLastRentDate", Date.class);

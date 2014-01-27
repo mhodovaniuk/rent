@@ -11,70 +11,120 @@
 <h:body>
     <ui:composition template="/WEB-INF/templates/template.xhtml">
         <ui:define name="content">
+
+            <h:outputScript library="js" name="dialog.js"/>
             <h:form>
-            <p:dataTable id="ordersDataTable" var="order" value="#{clientCabinetMB.userOrders}" paginator="true" rows="5"
-                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15">
-                <p:column headerText="#{texts.id}">
-                    <h:outputText value="#{order.id}"/>
-                </p:column>
-                <p:column headerText="#{texts.createDate}">
-                    <h:outputText value=""/>
-                </p:column>
-                <p:column headerText="#{texts.payed}">
-                    <h:outputText value="#{clientCabinetMB.getAcceptedPaymentsSum(order)}"/>
-                </p:column>
-                <p:column headerText="#{texts.totalCost}">
-                    <h:outputText value="#{clientCabinetMB.getTotalCost(order)}"/>
-                </p:column>
-                <p:column headerText="#{texts.details}">
-                    <p:commandButton value="#{texts.details}" oncomplete="PF('orderDetailsDLG').show();" actionListener="#{clientCabinetMB.setSelectedOrder(order)}"/>
-                </p:column>
-            </p:dataTable>
+                <p:dataTable id="ordersDataTable" var="order" value="#{clientCabinetMB.userOrders}" paginator="true"
+                             rows="5"
+                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                    <f:facet name="header">
+                        #{texts.orders}
+                    </f:facet>
+                    <p:column headerText="#{texts.id}">
+                        <h:outputText value="#{order.id}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.createDate}">
+                        <h:outputText value=""/>
+                    </p:column>
+                    <p:column headerText="#{texts.payed}">
+                        <h:outputText value="#{clientCabinetMB.getAcceptedPaymentsSum(order)}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.totalCost}">
+                        <h:outputText value="#{clientCabinetMB.getTotalCost(order)}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.details}">
+                        <div class="buttonInsideTable">
+                            <p:commandButton value="#{texts.details}" update=":orderDetailsID"
+                                             oncomplete="PF('orderDetailsDLG').show();">
+                                <f:setPropertyActionListener value="#{order}"
+                                                             target="#{clientCabinetMB.selectedOrder}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                    <p:column headerText="#{texts.addPayment}">
+                        <p:commandButton value="#{texts.add}" update=":addPaymentID" oncomplete="PF('dlg').show();">
+                            <f:setPropertyActionListener value="#{order}" target="#{clientCabinetMB.selectedOrder}"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
             </h:form>
+            <p:dialog id="addPaymentID" header="#{texts.addPayment}" widgetVar="dlg" resizable="false">
+                <h:form id="addPaymentFormID">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="dateInput" value="#{texts.date}"/>
+                        <p:calendar id="dateInput" value="#{clientCabinetMB.newPayment.date}"
+                                    pattern="dd/MM/yyyy" required="true"
+                                    requiredMessage="#{texts.emptyFieldERR}" showOn="button">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:calendar>
+                        <p:outputLabel for="valueInput" value="#{texts.value}"/>
+                        <p:spinner id="valueInput" value="#{clientCabinetMB.newPayment.value}" prefix="$" min="0"
+                                   validatorMessage="#{texts.fieldFormatERR}"
+                                   required="true"
+                                   requiredMessage="#{texts.emptyFieldERR}" stepFactor="0.01"/>
+                        <p:outputLabel for="details" value="#{texts.details}"/>
+                        <p:inputText id="details" maxlength="128" value="#{clientCabinetMB.newPayment.details}"/>
+                    </h:panelGrid>
+                    <p:commandButton id="okButton" value="#{texts.add}"
+                                     actionListener="#{clientCabinetMB.doVerifyAndAddPayment()}"
+                                     oncomplete="handleLoginRequest(xhr, status, args)"/>
+                    <p:commandButton id="cancelButton" value="#{texts.cancel}"
+                                     onclick="PF('dlg').hide();" type="button"/>
+                </h:form>
 
-            <p:dialog id="orderDetails" header="#{texts.details}" widgetVar="orderDetailsDLG" modal="true" resizable="false">
+            </p:dialog>
 
-                    <p:dataTable  id="orderPartsDataTable" styleClass="table" value="#{clientCabinetMB.selectedOrder.orderParts}" var="part" paginator="true" rows="5"
-                                  paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                  rowsPerPageTemplate="5,10,15">
-                        <f:facet name="header">#{texts.orderPart}</f:facet>
-                        <p:column headerText="#{texts.id}">
-                            <h:outputText value="#{part.id}"/>
-                        </p:column>
-                        <p:column headerText="#{texts.areaNumber}">
-                            <h:outputText value="#{part.area.number}"/>
-                        </p:column>
-                        <p:column headerText="#{texts.startDate}">
-                            <h:outputText value="#{part.startDate}"/>
-                        </p:column>
-                        <p:column headerText="#{texts.endDate}">
-                            <h:outputText value="#{part.endDate}"/>
-                        </p:column>
-                        <p:column headerText="#{texts.totalCost}">
-                            <h:outputText value="#{part.totalCost}"/>
-                        </p:column>
-                    </p:dataTable>
-                    <p:dataTable id="paymentsDataTable" styleClass="table" value="#{clientCabinetMB.selectedOrder.payments}" var="payment" paginator="true" rows="5"
-                                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                 rowsPerPageTemplate="5,10,15">
-                        <f:facet name="header">#{texts.payment}</f:facet>
-                        <p:column headerText="#{texts.id}">
-                            <h:outputText value="#{payment.id}"/>
-                        </p:column>
-                        <p:column headerText="#{texts.value}">
-                            <h:outputText value="#{payment.value}"/>
-                        </p:column>
-                        <p:column headerText="#{texts.createDate}">
-                            <h:outputText value="#{payment.date}"/>
-                        </p:column>
-                        <p:column headerText="#{texts.details}">
-                            <h:outputText value="#{payment.details}"/>
-                        </p:column>
-                        <p:column headerText="#{texts.accepted}">
-                            <p:graphicImage value="/resources/img/true.png"  rendered="#{payment.accepted}" width="32" height="32"/>
-                        </p:column>
-                    </p:dataTable>
+            <p:dialog id="orderDetailsID" header="#{texts.details}" widgetVar="orderDetailsDLG" modal="true"
+                      resizable="false">
+
+                <p:dataTable id="orderPartsDataTable" styleClass="table"
+                             value="#{clientCabinetMB.selectedOrder.orderParts}" var="part" paginator="true" rows="5"
+                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                    <f:facet name="header">
+                        #{texts.orderPart}
+                    </f:facet>
+                    <p:column headerText="#{texts.id}">
+                        <h:outputText value="#{part.id}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.areaNumber}">
+                        <h:outputText value="#{part.area.number}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.startDate}">
+                        <h:outputText value="#{part.startDate}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.endDate}">
+                        <h:outputText value="#{part.endDate}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.totalCost}">
+                        <h:outputText value="#{part.totalCost}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:dataTable id="paymentsDataTable" styleClass="table" value="#{clientCabinetMB.selectedOrder.payments}"
+                             var="payment" paginator="true" rows="5"
+                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                    <f:facet name="header">
+                        #{texts.payment}
+                    </f:facet>
+                    <p:column headerText="#{texts.id}">
+                        <h:outputText value="#{payment.id}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.value}">
+                        <h:outputText value="#{payment.value}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.createDate}">
+                        <h:outputText value="#{payment.date}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.details}">
+                        <h:outputText value="#{payment.details}"/>
+                    </p:column>
+                    <p:column headerText="#{texts.accepted}">
+                        <p:graphicImage value="/resources/img/true.png" rendered="#{payment.accepted}" width="32"
+                                        height="32"/>
+                    </p:column>
+                </p:dataTable>
             </p:dialog>
         </ui:define>
     </ui:composition>

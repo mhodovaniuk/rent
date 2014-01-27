@@ -47,15 +47,12 @@ public class AreasMB implements Serializable {
         dataModel=new LazyDataModel<Area>() {
             @Override
             public List<Area> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, String> filters) {
-                if (areaNumber==null || "".equals(areaNumber))
-                    return areaDAO.findAll(first,pageSize);
-                else{
-                    String tmp=areaNumber;
-                    return areaDAO.search(tmp);
-                }
+                if (areaNumber==null)
+                    areaNumber="";
+                setRowCount(areaDAO.searchSize(areaNumber));
+                return areaDAO.search(first,pageSize,areaNumber);
             }
         };
-        dataModel.setRowCount((int) areaDAO.findAreasCount());
     }
     public AreasMB() {
     }

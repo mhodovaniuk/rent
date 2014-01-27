@@ -11,8 +11,7 @@
 <h:body>
     <ui:composition template="/WEB-INF/templates/template.xhtml">
         <ui:define name="content">
-            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-            <h:outputText value="#{texts.pageInProgressOfDeveloping}"/>
+            <div class="centeredMsg">  <h3><h:outputText value="#{texts.pageInProgressOfDeveloping}"/></h3></div>
         </ui:define>
     </ui:composition>
 </h:body>

@@ -2,7 +2,7 @@
     width: 1280px;
     height: 1680px;
     margin: auto;
-    background-color: rgba(74, 240, 62, 0.24);
+    background-color: rgba(77, 155, 240, 0.24);
 }
 
 
@@ -52,17 +52,17 @@
 }
 
 .centeredDiv{
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
 .button{
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 5px;
+    margin-bottom: 10px;
 }
-.inputText{
-    width: 10em;
-}
+
 
 .form{
     width: 700px;
@@ -71,7 +71,30 @@
 }
 
 .table{
-    display: inline-block;
+    display: table-cell;
+    vertical-align: top;
     padding: 10px;
+}
+.buttonInsideTable{
+    margin-left: auto;
+    margin-right: auto;
+}
+.label{
+    margin: 5px;
+}
+.inputField{
+    margin: 5px;
+    width: 10em;
+}
+.centeredMsg{
+    text-align: center;
+}
+#content{
+    width: 95%;
+    margin: 0 auto;
+
+}
+td{
+    text-align:center;
 }
 

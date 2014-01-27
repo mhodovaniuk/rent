@@ -10,20 +10,18 @@
 <h:body>
     <ui:composition template="/WEB-INF/templates/template.xhtml">
         <ui:define name="content">
-        <h:form styleClass="form">
-            <h:panelGrid columns="2">
-                <p:outputLabel for="inputAreaNumber" value="#{texts.areaNumber}"/>
-                <p:inputText id="inputAreaNumber" value="#{areasMB.areaNumber}" />
-                <div></div>
-                <h:panelGroup>
-                    <p:commandButton update=":viewDataTable" value="#{texts.search}"/>/
-                    <p:commandButton update=":viewDataTable" value="#{texts.viewAll}" actionListener="#{areasMB.cleanAreaNumber()}"/>
-                </h:panelGroup>
-            </h:panelGrid>
+        <h:form styleClass="centeredDiv">
+                <p:outputLabel for="inputAreaNumber" value="#{texts.areaNumber}" styleClass="label"/>
+                <p:inputText id="inputAreaNumber" value="#{areasMB.areaNumber}" styleClass="inputField">
+                    <p:ajax event="keyup" update=":viewDataTable" />
+                </p:inputText>
         </h:form>
         <p:dataTable id="viewDataTable" var="area" value="#{areasMB.dataModel}" paginator="true" rows="5"
                      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                      rowsPerPageTemplate="5,10,15" lazy="true">
+            <f:facet name="header">
+                #{texts.areas}
+            </f:facet>
             <p:column headerText="#{texts.plan}">
                 <p:graphicImage value="#{area.imagePath}" width="150" height="100"/>
             </p:column>
