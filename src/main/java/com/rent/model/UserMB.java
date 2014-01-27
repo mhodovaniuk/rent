@@ -92,6 +92,7 @@ public class UserMB implements Serializable {
 
     public String doRegister() {
         userDAO.persist(regDTOUser);
+        regDTOUser=new User();
         String messageText= ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("regMSG");
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", messageText));
         return "home";

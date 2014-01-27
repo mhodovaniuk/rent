@@ -15,8 +15,8 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @NamedQuery(name = "User.findByEmail",query = "select u from User u where u.email=:email")
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = SEQUENCE, generator = "user_id_seq_gen")
-    @SequenceGenerator(name = "user_id_seq_gen", sequenceName = "user_id_seq")
+    @GeneratedValue(strategy = SEQUENCE, generator = "user_id_seq_gen" )
+    @SequenceGenerator(name = "user_id_seq_gen", sequenceName = "user_id_seq",initialValue = 1000)
     private Long id;
     @Column(unique = true)
 
