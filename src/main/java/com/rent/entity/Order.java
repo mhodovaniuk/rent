@@ -1,6 +1,7 @@
 package com.rent.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -12,10 +13,11 @@ import java.util.List;
 @Table(name = "\"Order\"")
 @NamedQueries({
     @NamedQuery(name="Order.findUserOrders",query = "select o from Order o where o.user.id=:userId"),
+    @NamedQuery(name="Order.isExistsWithSuchID",query = "select count(o) from Order o where o.visibleID=:visibleID"),
     @NamedQuery(name= "Order.findAcceptedPaymentsSum",query = "select sum(value) from Payment p where p.order.id=:orderId and p.accepted=true"),
     @NamedQuery(name= "Order.findTotalCost",query = "select sum(totalCost) from OrderPart p where p.order.id=:orderId")
 })
-public class Order {
+public class Order implements Serializable,VisibleID {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id_seq_gen")
     @SequenceGenerator(name = "order_id_seq_gen", sequenceName = "order_id_seq")
@@ -32,6 +34,9 @@ public class Order {
     private List<OrderPart> orderParts=new ArrayList<OrderPart>();
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "order")
     private List<Payment> payments=new ArrayList<Payment>();
+    @Column(unique = true)
+    private String visibleID;
+
 
     public Order() {
     }
@@ -85,4 +90,11 @@ public class Order {
         this.payments = payments;
     }
 
+    public String getVisibleID() {
+        return visibleID;
+    }
+
+    public void setVisibleID(String visibleID) {
+        this.visibleID = visibleID;
+    }
 }

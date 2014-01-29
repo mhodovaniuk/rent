@@ -1,6 +1,8 @@
 package com.rent.dao;
 
 import com.rent.entity.Order;
+import com.rent.entity.OrderPart;
+import com.rent.utils.IndentifierGenerator;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -22,6 +24,16 @@ public class OrderDAO extends BaseDAO<Order> {
     public OrderDAO() {
         super(Order.class);
     }
+
+    @Override
+    public Order persist(Order e) {
+        setVisibleID(e,"Order.isExistsWithSuchID");
+        for (OrderPart part:e.getOrderParts())
+            setVisibleID(part,"OrderPart.isExistsWithSuchID");
+        return super.persist(e);
+    }
+
+
 
     @Override
     protected EntityManager getEntityManager() {

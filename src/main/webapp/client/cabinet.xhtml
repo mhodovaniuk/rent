@@ -21,7 +21,7 @@
                         #{texts.orders}
                     </f:facet>
                     <p:column headerText="#{texts.id}">
-                        <h:outputText value="#{order.id}"/>
+                        <h:outputText value="#{order.visibleID}"/>
                     </p:column>
                     <p:column headerText="#{texts.createDate}">
                         <h:outputText value="#{order.creatingDate.getTime()}">
@@ -89,7 +89,7 @@
                         #{texts.orderPart}
                     </f:facet>
                     <p:column headerText="#{texts.id}">
-                        <h:outputText value="#{part.id}"/>
+                        <h:outputText value="#{part.visibleID}"/>
                     </p:column>
                     <p:column headerText="#{texts.areaNumber}">
                         <h:outputText value="#{part.area.number}"/>
@@ -116,7 +116,7 @@
                         #{texts.payment}
                     </f:facet>
                     <p:column headerText="#{texts.id}">
-                        <h:outputText value="#{payment.id}"/>
+                        <h:outputText value="#{payment.visibleID}"/>
                     </p:column>
                     <p:column headerText="#{texts.value}">
                         <h:outputText value="#{payment.value}"/>

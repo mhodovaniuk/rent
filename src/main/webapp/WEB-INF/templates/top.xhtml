@@ -19,8 +19,8 @@
             </div>
             <div id="languageDiv" class="topItem">
                 <h:form>
-                    <h:commandLink action="#{userMB.doChangeLanguage('EN')}" value="EN"/><br/>
-                    <h:commandLink action="#{userMB.doChangeLanguage('UA')}" value="UA"/>
+                    <h:commandLink actionListener="#{userMB.doChangeLanguage('EN')}" value="EN"/><br/>
+                    <h:commandLink actionListener="#{userMB.doChangeLanguage('UA')}" value="UA"/>
                 </h:form>
             </div>
             <div id="userDiv" class="topItem">
@@ -50,7 +50,7 @@
         <div id="topMenu">
             <h:link styleClass="menuButton" value="#{texts.mainPage}" outcome="/index"/>
             <h:link styleClass="menuButton" value="#{texts.rentPage}" outcome="/client/rent"/>
-            <h:link styleClass="menuButton" value="#{texts.cabinetPage}" outcome="/client/cabinet"/>
+            <h:link styleClass="menuButton" value="#{texts.cabinetPage}" outcome="/client/cabinet" rendered="#{facesContext.externalContext.isUserInRole('CLIENT') or facesContext.externalContext.isUserInRole('ADMIN')}"/>
             <h:link styleClass="menuButton" value="#{texts.adminCabinetPage}" outcome="/admin/cabinet"
                     rendered="#{facesContext.externalContext.isUserInRole('ADMIN')}"/>
             <h:link styleClass="menuButton" value="#{texts.areasPage}" outcome="/client/areas"/>

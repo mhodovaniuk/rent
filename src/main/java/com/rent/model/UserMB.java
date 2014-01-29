@@ -134,6 +134,6 @@ public class UserMB implements Serializable {
     public String doChangeLanguage(String languageCode){
         if (LOCALES.containsKey(languageCode))
             setLocale(LOCALES.get(languageCode));
-        return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
+        return FacesContext.getCurrentInstance().getViewRoot().getViewId() ;
     }
 }

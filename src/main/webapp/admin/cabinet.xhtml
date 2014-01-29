@@ -14,7 +14,7 @@
                      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                      rowsPerPageTemplate="5,10,15">
             <p:column headerText="#{texts.id}">
-                <h:outputText value="#{payment.id}"/>
+                <h:outputText value="#{payment.visibleID}"/>
             </p:column>
             <p:column headerText="#{texts.date}">
                 <h:outputText value="#{payment.date}">
@@ -26,7 +26,7 @@
             </p:column>
 
             <p:column headerText="#{texts.orderId}">
-                <h:outputText value="#{payment.order.id}"/>
+                <h:outputText value="#{payment.order.visibleID}"/>
             </p:column>
             <p:column headerText="#{texts.details}">
                 <h:outputText value="#{payment.details}"/>

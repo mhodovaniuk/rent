@@ -14,7 +14,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "\"OrderPart\"")
-public class OrderPart implements Serializable {
+@NamedQuery(name="OrderPart.isExistsWithSuchID",query = "select count(p) from OrderPart p where p.visibleID=:visibleID")
+public class OrderPart implements Serializable,VisibleID  {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "order_part_id_seq_gen")
     @SequenceGenerator(name = "order_part_id_seq_gen",sequenceName = "order_part_id_seq")
@@ -32,6 +33,9 @@ public class OrderPart implements Serializable {
     @ManyToOne
     @JoinColumn(name="area_id")
     private Area area;
+    @Column(unique = true)
+    private String visibleID;
+
 
     public OrderPart() {
     }
@@ -85,5 +89,13 @@ public class OrderPart implements Serializable {
 
     public void setArea(Area area) {
         this.area = area;
+    }
+
+    public String getVisibleID() {
+        return visibleID;
+    }
+
+    public void setVisibleID(String visibleID) {
+        this.visibleID = visibleID;
     }
 }

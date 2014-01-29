@@ -1,6 +1,7 @@
 package com.rent.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,8 +13,12 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "\"Payment\"")
-@NamedQuery(name = "Payment.findAllNotAcceptedPayments",query = "select p from Payment p where p.accepted=false")
-public class Payment {
+
+@NamedQueries({
+        @NamedQuery(name = "Payment.findAllNotAcceptedPayments", query = "select p from Payment p where p.accepted=false"),
+        @NamedQuery(name = "Payment.isExistsWithSuchID", query = "select count(p) from Payment p where p.visibleID=:visibleID")
+})
+public class Payment implements Serializable,VisibleID {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_id_seq_gen")
     @SequenceGenerator(name = "payment_id_seq_gen", sequenceName = "payment_id_seq")
@@ -30,6 +35,8 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
+    @Column(unique = true)
+    private String visibleID;
 
     public Payment() {
     }
@@ -80,6 +87,14 @@ public class Payment {
 
     public void setOrder(Order orderPart) {
         this.order = orderPart;
+    }
+
+    public String getVisibleID() {
+        return visibleID;
+    }
+
+    public void setVisibleID(String visibleID) {
+        this.visibleID = visibleID;
     }
 }
 

@@ -38,22 +38,25 @@
             </p:dialog>
 
 
-            <h:form id="search" styleClass="form">
-                <h:panelGrid columns="2">
+            <h:form id="rentSearch">
+                <h:panelGrid columns="5">
                     <p:outputLabel for="floorInput" value="#{texts.floor}" styleClass="label"/>
                     <h:panelGroup id="floorInput">
                         <p:spinner id="fromFloorInput" value="#{rentMB.searchDTO.fromFloor}"
                                    styleClass="inputSpinnerField" size="7" min="0" max="100" maxlength="11"/>
                         <p:watermark value="#{texts.from}" for="fromFloorInput"/>
+                        <h:outputText value="-"/>
                         <p:spinner id="toFloorInput" value="#{rentMB.searchDTO.toFloor}" styleClass="inputSpinnerField"
                                    size="7" min="0" max="100" maxlength="11"/>
                         <p:watermark value="#{texts.to}" for="toFloorInput"/>
                     </h:panelGroup>
+                    <div class="emptyDiv"></div>
                     <p:outputLabel for="rentInput" value="#{texts.rent}" styleClass="label"/>
                     <h:panelGroup id="rentInput">
                         <p:spinner id="fromRentInput" value="#{rentMB.searchDTO.fromRent}"
                                    styleClass="inputSpinnerField" size="7" min="0" max="100000" stepFactor="0.1" maxlength="11"/>
                         <p:watermark value="#{texts.from}" for="fromRentInput"/>
+                        <h:outputText value="-"/>
                         <p:spinner id="toRentInput" value="#{rentMB.searchDTO.toRent}" styleClass="inputSpinnerField"
                                    size="7" min="0" max="100000" stepFactor="0.1" maxlength="11"/>
                         <p:watermark value="#{texts.to}" for="toRentInput"/>
@@ -63,10 +66,12 @@
                         <p:spinner id="fromSquareInput" value="#{rentMB.searchDTO.fromSquare}"
                                    styleClass="inputSpinnerField" size="7" min="0" max="100000" stepFactor="0.1" maxlength="11"/>
                         <p:watermark value="#{texts.from}" for="fromSquareInput"/>
+                        <h:outputText value="-"/>
                         <p:spinner id="toSquareInput" value="#{rentMB.searchDTO.toSquare}"
                                    styleClass="inputSpinnerField" size="7" min="0" max="100000" stepFactor="0.1" maxlength="11"/>
                         <p:watermark value="#{texts.to}" for="toSquareInput"/>
                     </h:panelGroup>
+                    <div class="emptyDiv"></div>
                     <p:outputLabel for="aiconditionInput" value="#{texts.aircondition}" styleClass="label"/>
                     <p:selectOneMenu id="aiconditionInput" value="#{rentMB.searchDTO.aircondition}"
                                      styleClass="inputField">
@@ -75,9 +80,10 @@
                         <f:selectItem itemLabel="#{texts.airconditionDontCare}" itemValue="#{2}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
-                <p:commandButton styleClass="button" value="#{texts.search}" actionListener="#{rentMB.checkDTO()}"
+                <p:commandButton id="searchRentButton" styleClass="searchRentButton" value="#{texts.search}" actionListener="#{rentMB.checkDTO()}"
                                  update=":searchDataTableForm:searchDataTable"/>
             </h:form>
+            <div></div>
             <h:form id="searchDataTableForm">
                 <p:dataTable id="searchDataTable" var="area" value="#{rentMB.dataModel}" paginator="true" rows="5"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

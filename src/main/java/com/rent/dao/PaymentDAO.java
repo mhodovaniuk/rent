@@ -22,6 +22,12 @@ public class PaymentDAO extends BaseDAO<Payment> {
     }
 
     @Override
+    public Payment persist(Payment e) {
+        setVisibleID(e,"Payment.isExistsWithSuchID");
+        return super.persist(e);
+    }
+
+    @Override
     protected EntityManager getEntityManager() {
         return em;
     }

@@ -1,5 +1,8 @@
 package com.rent.dao;
 
+import com.rent.entity.VisibleID;
+import com.rent.utils.IndentifierGenerator;
+
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 
@@ -34,4 +37,17 @@ public abstract class BaseDAO<T> {
     public T find(Long id){
         return getEntityManager().find(entityClass,id);
     }
+    protected void setVisibleID(VisibleID e, String query) {
+        String id= IndentifierGenerator.nextId();
+        while (!isCorrectID(query,id)){
+            id = IndentifierGenerator.nextId();
+        }
+        e.setVisibleID(id);
+    }
+
+
+    protected boolean isCorrectID(String query, String id) {
+        return getEntityManager().createNamedQuery(query, Long.class).setParameter("visibleID",id).getSingleResult()==0;
+    }
+
 }
