@@ -3,9 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 <h:body>
     <ui:composition template="/WEB-INF/templates/template.xhtml">
@@ -15,11 +13,11 @@
                     <p:outputLabel for="emailInput" value="#{texts.email}" styleClass="label"/>
                     <p:inputText id="emailInput" value="#{userMB.userEmail}"
                                  required="true" requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField"/>
-                    <p:message for="emailInput"/>
+                    <p:message for="emailInput" maxlength="80"/>
                     <p:outputLabel for="passwordInput" value="#{texts.password}" styleClass="label"/>
                     <p:password id="passwordInput" value="#{userMB.userPassword}"
                                 required="true" requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField"/>
-                    <p:message for="passwordInput"/>
+                    <p:message for="passwordInput" maxlength="80"/>
                 </h:panelGrid>
                 <p:commandButton value="#{texts.login}" action="#{userMB.doLogin()}"
                                  update="loginForm" styleClass="button"/>

@@ -5,9 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:func="http://rent.com/functions">
+        >
 <h:body>
     <ui:composition template="/WEB-INF/templates/template.xhtml">
         <ui:define name="content">
@@ -17,7 +16,7 @@
                 <p:dataTable id="ordersDataTable" var="order" value="#{clientCabinetMB.userOrders}" paginator="true"
                              rows="5"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15">
+                             rowsPerPageTemplate="5,10,15"  styleClass="centeredTable">
                     <f:facet name="header">
                         #{texts.orders}
                     </f:facet>
@@ -25,7 +24,9 @@
                         <h:outputText value="#{order.id}"/>
                     </p:column>
                     <p:column headerText="#{texts.createDate}">
-                        <h:outputText value=""/>
+                        <h:outputText value="#{order.creatingDate.getTime()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </p:column>
                     <p:column headerText="#{texts.payed}">
                         <h:outputText value="#{clientCabinetMB.getAcceptedPaymentsSum(order)}"/>
@@ -51,20 +52,22 @@
             </h:form>
             <p:dialog id="addPaymentID" header="#{texts.addPayment}" widgetVar="dlg" resizable="false">
                 <h:form id="addPaymentFormID">
-                    <h:panelGrid columns="2">
+                    <h:panelGrid columns="3">
                         <p:outputLabel for="dateInput" value="#{texts.date}"/>
                         <p:calendar id="dateInput" value="#{clientCabinetMB.newPayment.date}"
                                     pattern="dd/MM/yyyy" required="true"
-                                    requiredMessage="#{texts.emptyFieldERR}" showOn="button">
+                                    requiredMessage="#{texts.emptyFieldERR}" showOn="button" styleClass="inputAddPayment">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </p:calendar>
+                        <p:message for="dateInput"/>
                         <p:outputLabel for="valueInput" value="#{texts.value}"/>
-                        <p:spinner id="valueInput" value="#{clientCabinetMB.newPayment.value}" prefix="$" min="0"
+                        <p:spinner id="valueInput" value="#{clientCabinetMB.newPayment.value}" prefix="$" min="0.01"
                                    validatorMessage="#{texts.fieldFormatERR}"
                                    required="true"
-                                   requiredMessage="#{texts.emptyFieldERR}" stepFactor="0.01"/>
+                                   requiredMessage="#{texts.emptyFieldERR}" stepFactor="0.01" styleClass="inputAddPayment"/>
+                        <p:message for="valueInput"/>
                         <p:outputLabel for="details" value="#{texts.details}"/>
-                        <p:inputText id="details" maxlength="128" value="#{clientCabinetMB.newPayment.details}"/>
+                        <p:inputText id="details" maxlength="128" value="#{clientCabinetMB.newPayment.details}" styleClass="inputAddPayment"/>
                     </h:panelGrid>
                     <p:commandButton id="okButton" value="#{texts.add}"
                                      actionListener="#{clientCabinetMB.doVerifyAndAddPayment()}"
@@ -81,7 +84,7 @@
                 <p:dataTable id="orderPartsDataTable" styleClass="table"
                              value="#{clientCabinetMB.selectedOrder.orderParts}" var="part" paginator="true" rows="5"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15">
+                             rowsPerPageTemplate="5,10,15"  >
                     <f:facet name="header">
                         #{texts.orderPart}
                     </f:facet>
@@ -92,10 +95,14 @@
                         <h:outputText value="#{part.area.number}"/>
                     </p:column>
                     <p:column headerText="#{texts.startDate}">
-                        <h:outputText value="#{part.startDate}"/>
+                        <h:outputText value="#{part.startDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </p:column>
                     <p:column headerText="#{texts.endDate}">
-                        <h:outputText value="#{part.endDate}"/>
+                        <h:outputText value="#{part.endDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </p:column>
                     <p:column headerText="#{texts.totalCost}">
                         <h:outputText value="#{part.totalCost}"/>
@@ -115,7 +122,9 @@
                         <h:outputText value="#{payment.value}"/>
                     </p:column>
                     <p:column headerText="#{texts.createDate}">
-                        <h:outputText value="#{payment.date}"/>
+                        <h:outputText value="#{payment.date}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </p:column>
                     <p:column headerText="#{texts.details}">
                         <h:outputText value="#{payment.details}"/>

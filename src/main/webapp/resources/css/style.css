@@ -105,9 +105,15 @@
     margin: 0 auto;
 
 }
-td{
+.centeredTable td {
+    text-align:center;
+}
+.table td {
     text-align:center;
 }
 .inputSpinnerField{
     margin: 5px;
+}
+.inputAddPayment{
+    width: 100%;
 }

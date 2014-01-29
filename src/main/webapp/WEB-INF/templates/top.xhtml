@@ -50,9 +50,8 @@
         <div id="topMenu">
             <h:link styleClass="menuButton" value="#{texts.mainPage}" outcome="/index"/>
             <h:link styleClass="menuButton" value="#{texts.rentPage}" outcome="/client/rent"/>
-            <h:link styleClass="menuButton" value="#{texts.cabinetPage}" outcome="/client/cabinet"
-                    rendered="#{facesContext.externalContext.isUserInRole('CLIENT')}"/>
-            <h:link styleClass="menuButton" value="#{texts.cabinetPage}" outcome="/admin/cabinet"
+            <h:link styleClass="menuButton" value="#{texts.cabinetPage}" outcome="/client/cabinet"/>
+            <h:link styleClass="menuButton" value="#{texts.adminCabinetPage}" outcome="/admin/cabinet"
                     rendered="#{facesContext.externalContext.isUserInRole('ADMIN')}"/>
             <h:link styleClass="menuButton" value="#{texts.areasPage}" outcome="/client/areas"/>
             <h:link styleClass="menuButton" value="#{texts.aboutPage}" outcome="/about"/>

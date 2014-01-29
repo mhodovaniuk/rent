@@ -6,7 +6,6 @@ import com.rent.entity.User;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -95,6 +94,7 @@ public class UserMB implements Serializable {
         regDTOUser=new User();
         String messageText= ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("regMSG");
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", messageText));
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         return "home";
     }
 
@@ -105,12 +105,15 @@ public class UserMB implements Serializable {
         try {
             request.login(userEmail, userPassword);
             user=userDAO.findByEmail(userEmail);
+            userEmail=null;
+            userPassword=null;
+            return "home";
         } catch (ServletException e) {
             String messageText= ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("loginERR");
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"",messageText));
+            userPassword=null;
             return "login";
         }
-        return "home";
     }
 
     public String doLogout() {
@@ -123,7 +126,7 @@ public class UserMB implements Serializable {
             return "login";
         } catch (ServletException e) {
             String messageText= ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("logoutERR");
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,messageText,messageText));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"",messageText));
             return "home";
         }
     }
