@@ -21,7 +21,7 @@
 
                     <p:outputLabel for="passwordInput" value="#{texts.password}" styleClass="label"/>
                     <p:password id="passwordInput" value="#{userMB.regDTOUser.password}" required="true"
-                                requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80">
+                                requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="16">
                         <f:validator validatorId="passwordValidator" />
                         <f:attribute name="password2" value="#{password2}"/>
                     </p:password>
@@ -29,7 +29,7 @@
 
                     <p:outputLabel for="passwordInput2" value="#{texts.passwordConfirm}" styleClass="label"/>
                     <p:password id="passwordInput2" binding="#{password2}" required="true"
-                                requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80"/>
+                                requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="16"/>
                     <p:message for="passwordInput2" styleClass="errorMessage"/>
 
                     <p:outputLabel for="companyNameInput" value="#{texts.companyName}" styleClass="label"/>

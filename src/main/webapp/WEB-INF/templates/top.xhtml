@@ -38,7 +38,7 @@
                             <f:param value="#{cartMB.order.orderParts.size()}"/>
                         </h:outputFormat>
                         <h:form>
-                            <p:commandButton value="#{texts.doRent}" action="cart"/>
+                            <p:commandButton id="goToCart" value="#{texts.doRent}" action="cart" disabled="#{cartMB.order.orderParts.size()==0}"/>
                         </h:form>
                         <h:form>
                             <p:commandLink value="#{texts.logout}" action="#{userMB.doLogout()}"/>

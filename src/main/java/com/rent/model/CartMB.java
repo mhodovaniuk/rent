@@ -34,7 +34,7 @@ public class CartMB implements Serializable {
     private UserMB userMB;
 
     private Order order;
-    private OrderPart orderPart;
+
 
     public Order getOrder() {
         return order;
@@ -43,7 +43,7 @@ public class CartMB implements Serializable {
     @PostConstruct
     public void refresh() {
         createNewOrder();
-        createNewOrderPart();
+
     }
 
     private void createNewOrder() {
@@ -51,17 +51,9 @@ public class CartMB implements Serializable {
         order.setUser(userMB.getUser());
     }
 
-    //attention: order must exists
-    private void createNewOrderPart() {
-        orderPart = new OrderPart();
+
+    public void doVerifyAndAddOrderPart(OrderPart orderPart) {
         orderPart.setOrder(order);
-    }
-
-    public OrderPart getOrderPart() {
-        return orderPart;
-    }
-
-    public void doVerifyAndAddOrderPart() {
         RequestContext requestContext = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         boolean addedStatus = true;
@@ -88,7 +80,6 @@ public class CartMB implements Serializable {
 
         if (addedStatus) {
             order.getOrderParts().add(orderPart);
-            createNewOrderPart();
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", added);
         }
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -136,9 +127,6 @@ public class CartMB implements Serializable {
         return cost;
     }
 
-    public void doChooseArea(Area area) {
 
-        orderPart.setArea(area);
-    }
 
 }

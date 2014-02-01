@@ -12,12 +12,14 @@
                 <h:panelGrid columns="3">
                     <p:outputLabel for="emailInput" value="#{texts.email}" styleClass="label"/>
                     <p:inputText id="emailInput" value="#{userMB.userEmail}"
-                                 required="true" requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField"/>
-                    <p:message for="emailInput" maxlength="80"/>
+                                 required="true" requiredMessage="#{texts.emptyFieldERR}"
+                                 styleClass="inputField" maxlength="80"/>
+                    <p:message for="emailInput"/>
                     <p:outputLabel for="passwordInput" value="#{texts.password}" styleClass="label"/>
                     <p:password id="passwordInput" value="#{userMB.userPassword}"
-                                required="true" requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField"/>
-                    <p:message for="passwordInput" maxlength="80"/>
+                                required="true" requiredMessage="#{texts.emptyFieldERR}"
+                                styleClass="inputField" maxlength="16"/>
+                    <p:message for="passwordInput"/>
                 </h:panelGrid>
                 <p:commandButton value="#{texts.login}" action="#{userMB.doLogin()}"
                                  update="loginForm" styleClass="button"/>

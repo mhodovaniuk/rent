@@ -16,21 +16,23 @@
                 <h:form id="dialogForm">
                     <h:panelGrid columns="2">
                         <p:outputLabel for="startDateInput" value="#{texts.chooseFirstDayOfMonth}"/>
-                        <p:calendar id="startDateInput" value="#{cartMB.orderPart.startDate}" showOn="button"
-                                    pattern="MM-yyyy" required="true" requiredMessage="#{texts.emptyFieldERR}">
+                        <p:calendar id="startDateInput" value="#{rentMB.orderPart.startDate}" showOn="button"
+                                    pattern="MM-yyyy" required="true"
+                                    requiredMessage="#{texts.emptyFieldERR}" readonlyInput="true">
                             <f:converter converterId="myDateConverter"/>
 
                         </p:calendar>
                         <p:outputLabel for="endDateInput" value="#{texts.chooseLastDayOfMonth}"/>
-                        <p:calendar id="endDateInput" value="#{cartMB.orderPart.endDate}" showOn="button"
+                        <p:calendar id="endDateInput" value="#{rentMB.orderPart.endDate}" showOn="button"
                                     pattern="MM-yyyy"
-                                    required="true" requiredMessage="#{texts.emptyFieldERR}">
+                                    required="true" requiredMessage="#{texts.emptyFieldERR}"
+                                    readonlyInput="true">
                             <f:converter converterId="myDateConverter"/>
                         </p:calendar>
                     </h:panelGrid>
                     <p:commandButton id="okButton" value="#{texts.ok}"
-                                     actionListener="#{cartMB.doVerifyAndAddOrderPart()}"
-                                     update=":#{p:component('cartDisplay')}"
+                                     actionListener="#{rentMB.doAddOrderPartToCart()}"
+                                     update=":#{p:component('cartDisplay')},:#{p:component('goToCart')}"
                                      oncomplete="handleLoginRequest(xhr, status, args)"/>
                     <p:commandButton id="cancelButton" value="#{texts.cancel}" update=":dialogForm"
                                      oncomplete="PF('dlg').hide();"/>
@@ -74,7 +76,7 @@
                     <div class="emptyDiv"></div>
                     <p:outputLabel for="aiconditionInput" value="#{texts.aircondition}" styleClass="label"/>
                     <p:selectOneMenu id="aiconditionInput" value="#{rentMB.searchDTO.aircondition}"
-                                     styleClass="inputField">
+                                     styleClass="inputField" >
                         <f:selectItem itemLabel="#{texts.airconditionExists}" itemValue="#{0}"/>
                         <f:selectItem itemLabel="#{texts.airconditionNotExists}" itemValue="#{1}"/>
                         <f:selectItem itemLabel="#{texts.airconditionDontCare}" itemValue="#{2}"/>
@@ -87,7 +89,7 @@
             <h:form id="searchDataTableForm">
                 <p:dataTable id="searchDataTable" var="area" value="#{rentMB.dataModel}" paginator="true" rows="5"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15" lazy="true" styleClass="centeredTable">
+                             rowsPerPageTemplate="5,10,15" lazy="true" styleClass="centeredTable" emptyMessage="#{texts.empryDataTable}">
                     <f:facet name="header">
                         #{texts.availableAreas}
                     </f:facet>
@@ -114,7 +116,7 @@
                     <p:column>
 
                         <p:commandButton value="#{texts.rentIt}" oncomplete="PF('dlg').show()"
-                                         actionListener="#{cartMB.doChooseArea(area)}">
+                                         actionListener="#{rentMB.doChooseArea(area)}">
                         </p:commandButton>
 
                     </p:column>

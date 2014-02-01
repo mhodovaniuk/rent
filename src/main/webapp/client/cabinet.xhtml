@@ -16,7 +16,7 @@
                 <p:dataTable id="ordersDataTable" var="order" value="#{clientCabinetMB.userOrders}" paginator="true"
                              rows="5"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15"  styleClass="centeredTable">
+                             rowsPerPageTemplate="5,10,15"  styleClass="centeredTable"  emptyMessage="#{texts.empryDataTable}">
                     <f:facet name="header">
                         #{texts.orders}
                     </f:facet>
@@ -56,7 +56,8 @@
                         <p:outputLabel for="dateInput" value="#{texts.date}"/>
                         <p:calendar id="dateInput" value="#{clientCabinetMB.newPayment.date}"
                                     pattern="dd/MM/yyyy" required="true"
-                                    requiredMessage="#{texts.emptyFieldERR}" showOn="button" styleClass="inputAddPayment">
+                                    requiredMessage="#{texts.emptyFieldERR}"
+                                    showOn="button" styleClass="inputAddPayment" readonlyInput="true">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </p:calendar>
                         <p:message for="dateInput"/>
@@ -84,7 +85,7 @@
                 <p:dataTable id="orderPartsDataTable" styleClass="table"
                              value="#{clientCabinetMB.selectedOrder.orderParts}" var="part" paginator="true" rows="5"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15"  >
+                             rowsPerPageTemplate="5,10,15" emptyMessage="#{texts.empryDataTable}" >
                     <f:facet name="header">
                         #{texts.orderPart}
                     </f:facet>
@@ -111,7 +112,7 @@
                 <p:dataTable id="paymentsDataTable" styleClass="table" value="#{clientCabinetMB.selectedOrder.payments}"
                              var="payment" paginator="true" rows="5"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15">
+                             rowsPerPageTemplate="5,10,15" emptyMessage="#{texts.empryDataTable}">
                     <f:facet name="header">
                         #{texts.payment}
                     </f:facet>
