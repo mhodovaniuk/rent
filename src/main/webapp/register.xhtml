@@ -9,7 +9,7 @@
 <h:body>
     <ui:composition template="WEB-INF/templates/template.xhtml">
         <ui:define name="content">
-            <h:form id="registerForm" styleClass="form">
+            <h:form id="registerForm" styleClass="form" rendered="#{p:userPrincipal() eq null}">
                 <p:messages globalOnly="true"/>
                 <h:panelGrid columns="3">
                     <p:outputLabel for="emailInput" value="#{texts.email}" styleClass="label"/>

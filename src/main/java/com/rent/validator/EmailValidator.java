@@ -37,7 +37,7 @@ public class EmailValidator implements Validator {
         String email=o.toString();
         if (email==null || email.isEmpty())
             return;
-        if (!email.matches("[a-zA-Z][A-Za-z0-9._]*@[a-z]+([.][a-z]*)+")){
+        if (!email.matches("[a-zA-Z][A-Za-z0-9._]*@[a-z]+([.][a-z]*)+")) {
             String messageText= ResourceBundle.getBundle("i18n/texts", facesContext.getViewRoot().getLocale()).getString("emailRegexpERR");
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,"",messageText));
         }
