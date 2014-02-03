@@ -17,7 +17,7 @@
                                  requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80">
                         <f:validator binding="#{emailValidator}" />
                     </p:inputText>
-                    <p:message for="emailInput" styleClass="errorMessage" />
+                    <p:growl for="emailInput" styleClass="errorMessage" />
 
                     <p:outputLabel for="passwordInput" value="#{texts.password}" styleClass="label"/>
                     <p:password id="passwordInput" value="#{userMB.regDTOUser.password}" required="true"

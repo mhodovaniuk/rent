@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by mykhailo on 1/9/14.
  */
 public class MyDateUtil {
-    private static final SimpleDateFormat SDF=new SimpleDateFormat("MM-yyyy");
+    private static final SimpleDateFormat SDF=new SimpleDateFormat("MM/yyyy");
     private MyDateUtil(){
 
     }

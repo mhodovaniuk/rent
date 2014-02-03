@@ -14,7 +14,7 @@
                     <p:inputText id="emailInput" value="#{userMB.userEmail}"
                                  required="true" requiredMessage="#{texts.emptyFieldERR}"
                                  styleClass="inputField" maxlength="80"/>
-                    <p:message for="emailInput"/>
+                    <p:growl for="emailInput"/>
                     <p:outputLabel for="passwordInput" value="#{texts.password}" styleClass="label"/>
                     <p:password id="passwordInput" value="#{userMB.userPassword}"
                                 required="true" requiredMessage="#{texts.emptyFieldERR}"

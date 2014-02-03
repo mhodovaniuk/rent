@@ -17,14 +17,14 @@
                     <h:panelGrid columns="2">
                         <p:outputLabel for="startDateInput" value="#{texts.chooseFirstDayOfMonth}"/>
                         <p:calendar id="startDateInput" value="#{rentMB.orderPart.startDate}" showOn="button"
-                                    pattern="MM-yyyy" required="true"
+                                    pattern="MM/yyyy" required="true"
                                     requiredMessage="#{texts.emptyFieldERR}" readonlyInput="true">
                             <f:converter converterId="myDateConverter"/>
 
                         </p:calendar>
                         <p:outputLabel for="endDateInput" value="#{texts.chooseLastDayOfMonth}"/>
                         <p:calendar id="endDateInput" value="#{rentMB.orderPart.endDate}" showOn="button"
-                                    pattern="MM-yyyy"
+                                    pattern="MM/yyyy"
                                     required="true" requiredMessage="#{texts.emptyFieldERR}"
                                     readonlyInput="true">
                             <f:converter converterId="myDateConverter"/>
@@ -32,7 +32,7 @@
                     </h:panelGrid>
                     <p:commandButton id="okButton" value="#{texts.ok}"
                                      actionListener="#{rentMB.doAddOrderPartToCart()}"
-                                     update=":#{p:component('cartDisplay')},:#{p:component('goToCart')}"
+                                     update=":#{p:component('cartDisplay')},:#{p:component('goToCart')},:dialogForm"
                                      oncomplete="handleLoginRequest(xhr, status, args)"/>
                     <p:commandButton id="cancelButton" value="#{texts.cancel}" update=":dialogForm"
                                      oncomplete="PF('dlg').hide();"/>
