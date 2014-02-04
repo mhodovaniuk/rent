@@ -14,7 +14,7 @@
 
             <p:dataTable id="cartDataTable" styleClass="centeredTable" var="part" value="#{cartMB.order.orderParts}" paginator="true" rows="5"
                          paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15"  emptyMessage="#{texts.empryDataTable}">
+                         rowsPerPageTemplate="5,10,15"  emptyMessage="#{texts.emptyDataTable}">
                 <f:facet name="header">#{texts.totalCost}: #{cartMB.cost}</f:facet>
                 <p:column headerText="#{texts.plan}">
                     <p:graphicImage value="#{part.area.imagePath}" width="150" height="100"/>

@@ -1,19 +1,41 @@
 #page {
     width: 1600px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
     background-color: rgba(77, 155, 240, 0.24);
 }
 #footer{
     width: 1600px;
-    margin: auto;
-    height: 100px;
-    position: relative;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
 }
 #footerDiv{
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    height: 100px;
+
+}
+
+#inputAddPayment {
+    padding: 5px;
+}
+#buttonAddPayment{
+    padding: 5px;
+}
+
+html, body{
+    padding:0;
+    margin:0;
+    height: 100%;
+}
+
+body {
+
+    min-height: 100%;
+    height: 100%;
+    position: relative;
 }
 
 
@@ -121,7 +143,6 @@
 #content{
     width: 100%;
     margin: 0 auto;
-    height: 100%;
 }
 
 .centeredTable{
@@ -144,4 +165,12 @@
 }
 .emptyDiv{
     width: 100px;
+}
+
+.buttonAddPayment{
+    margin-left: 10px;
+}
+
+#addPayment, td{
+    padding: 5px;
 }

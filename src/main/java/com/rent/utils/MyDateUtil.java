@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by mykhailo on 1/9/14.
@@ -29,6 +30,7 @@ public class MyDateUtil {
         c.set(Calendar.HOUR_OF_DAY,0);
         c.set(Calendar.MINUTE,0);
         c.set(Calendar.SECOND,1);
+        System.out.println(c.getTime());
         return c.getTime();
     }
     public static Date setToLastDayOfMonth(Date date){
@@ -38,6 +40,7 @@ public class MyDateUtil {
         c.set(Calendar.HOUR_OF_DAY,23);
         c.set(Calendar.MINUTE,59);
         c.set(Calendar.SECOND,59);
+        System.out.println(c.getTime());
         return c.getTime();
     }
 

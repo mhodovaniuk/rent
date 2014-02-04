@@ -7,6 +7,6 @@ public  class IndentifierGenerator {
     private static final SecureRandom random = new SecureRandom();
 
     public static String nextId() {
-        return new BigInteger(66, random).toString(32);
+        return new BigInteger(48, random).toString(32);
     }
 }

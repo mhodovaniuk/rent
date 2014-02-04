@@ -24,9 +24,10 @@ public class OrderPart implements Serializable,VisibleID  {
     @JoinColumn(name = "order_id")
     private Order order;
     @Column
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
     @Column
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
     @Column
     private BigDecimal totalCost;

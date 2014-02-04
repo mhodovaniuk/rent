@@ -18,7 +18,7 @@
         </h:form>
         <p:dataTable id="viewDataTable" styleClass="centeredTable" var="area" value="#{areasMB.dataModel}" paginator="true" rows="5"
                      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                     rowsPerPageTemplate="5,10,15" lazy="true" emptyMessage="#{texts.empryDataTable}">
+                     rowsPerPageTemplate="5,10,15" lazy="true" emptyMessage="#{texts.emptyDataTable}">
             <f:facet name="header">
                 #{texts.areas}
             </f:facet>

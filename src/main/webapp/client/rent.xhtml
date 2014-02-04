@@ -89,7 +89,7 @@
             <h:form id="searchDataTableForm">
                 <p:dataTable id="searchDataTable" var="area" value="#{rentMB.dataModel}" paginator="true" rows="5"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15" lazy="true" styleClass="centeredTable" emptyMessage="#{texts.empryDataTable}">
+                             rowsPerPageTemplate="5,10,15" lazy="true" styleClass="centeredTable" emptyMessage="#{texts.emptyDataTable}">
                     <f:facet name="header">
                         #{texts.availableAreas}
                     </f:facet>

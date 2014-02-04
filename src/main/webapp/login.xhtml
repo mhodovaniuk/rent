@@ -8,13 +8,14 @@
 <h:body>
     <ui:composition template="/WEB-INF/templates/template.xhtml">
         <ui:define name="content">
-            <h:form id="loginForm" styleClass="form">
+
+            <h:form id="loginForm" styleClass="form" rendered="#{p:userPrincipal() eq null}">
                 <h:panelGrid columns="3">
                     <p:outputLabel for="emailInput" value="#{texts.email}" styleClass="label"/>
                     <p:inputText id="emailInput" value="#{userMB.userEmail}"
                                  required="true" requiredMessage="#{texts.emptyFieldERR}"
                                  styleClass="inputField" maxlength="80"/>
-                    <p:growl for="emailInput"/>
+                    <p:message for="emailInput" showDetail="true" sticky="true"/>
                     <p:outputLabel for="passwordInput" value="#{texts.password}" styleClass="label"/>
                     <p:password id="passwordInput" value="#{userMB.userPassword}"
                                 required="true" requiredMessage="#{texts.emptyFieldERR}"
@@ -24,6 +25,7 @@
                 <p:commandButton value="#{texts.login}" action="#{userMB.doLogin()}"
                                  update="loginForm" styleClass="button"/>
             </h:form>
+
         </ui:define>
     </ui:composition>
 </h:body>
