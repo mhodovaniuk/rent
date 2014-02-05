@@ -17,15 +17,14 @@
                     <h:panelGrid columns="2">
                         <p:outputLabel for="startDateInput" value="#{texts.chooseFirstDayOfMonth}"/>
                         <p:calendar id="startDateInput" value="#{rentMB.orderPart.startDate}" showOn="button"
-                                    pattern="MM/yyyy" required="true"
-                                    requiredMessage="#{texts.emptyFieldERR}" readonlyInput="true">
+                                    pattern="MM/yyyy"  readonlyInput="true">
                             <f:converter converterId="myDateConverter"/>
 
                         </p:calendar>
                         <p:outputLabel for="endDateInput" value="#{texts.chooseLastDayOfMonth}"/>
                         <p:calendar id="endDateInput" value="#{rentMB.orderPart.endDate}" showOn="button"
                                     pattern="MM/yyyy"
-                                    required="true" requiredMessage="#{texts.emptyFieldERR}"
+
                                     readonlyInput="true">
                             <f:converter converterId="myDateConverter"/>
                         </p:calendar>
@@ -56,21 +55,28 @@
                     <p:outputLabel for="rentInput" value="#{texts.rent}" styleClass="label"/>
                     <h:panelGroup id="rentInput">
                         <p:spinner id="fromRentInput" value="#{rentMB.searchDTO.fromRent}"
-                                   styleClass="inputSpinnerField" size="7" min="0" max="100000" stepFactor="0.1" maxlength="11"/>
+                                   styleClass="inputSpinnerField" size="7" min="0" max="100000" stepFactor="0.1" maxlength="11">
+                            <f:converter converterId="javax.faces.BigDecimal"/>
+                                   </p:spinner>
                         <p:watermark value="#{texts.from}" for="fromRentInput"/>
                         <h:outputText value="-"/>
                         <p:spinner id="toRentInput" value="#{rentMB.searchDTO.toRent}" styleClass="inputSpinnerField"
-                                   size="7" min="0" max="100000" stepFactor="0.1" maxlength="11"/>
+                                   size="7" min="0" max="100000" stepFactor="0.1" maxlength="11">
+                            <f:converter converterId="javax.faces.BigDecimal"/>
+                                   </p:spinner>
                         <p:watermark value="#{texts.to}" for="toRentInput"/>
                     </h:panelGroup>
                     <p:outputLabel for="squareInput" value="#{texts.square}" styleClass="label"/>
                     <h:panelGroup id="squareInput">
                         <p:spinner id="fromSquareInput" value="#{rentMB.searchDTO.fromSquare}"
-                                   styleClass="inputSpinnerField" size="7" min="0" max="100000" stepFactor="0.1" maxlength="11"/>
+                                   styleClass="inputSpinnerField" size="7" min="0" max="100000" stepFactor="0.1" maxlength="11">
+                                   </p:spinner>
+
                         <p:watermark value="#{texts.from}" for="fromSquareInput"/>
                         <h:outputText value="-"/>
                         <p:spinner id="toSquareInput" value="#{rentMB.searchDTO.toSquare}"
-                                   styleClass="inputSpinnerField" size="7" min="0" max="100000" stepFactor="0.1" maxlength="11"/>
+                                   styleClass="inputSpinnerField" size="7" min="0" max="100000" stepFactor="0.1" maxlength="11">
+                                   </p:spinner>
                         <p:watermark value="#{texts.to}" for="toSquareInput"/>
                     </h:panelGroup>
                     <div class="emptyDiv"></div>

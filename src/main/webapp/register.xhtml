@@ -17,11 +17,11 @@
                                  requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80">
                         <f:validator binding="#{emailValidator}" />
                     </p:inputText>
-                    <p:growl for="emailInput" styleClass="errorMessage" />
+                    <p:message for="emailInput" styleClass="errorMessage" />
 
                     <p:outputLabel for="passwordInput" value="#{texts.password}" styleClass="label"/>
                     <p:password id="passwordInput" value="#{userMB.regDTOUser.password}" required="true"
-                                requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="16">
+                                requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField">
                         <f:validator validatorId="passwordValidator" />
                         <f:attribute name="password2" value="#{password2}"/>
                     </p:password>
@@ -29,7 +29,7 @@
 
                     <p:outputLabel for="passwordInput2" value="#{texts.passwordConfirm}" styleClass="label"/>
                     <p:password id="passwordInput2" binding="#{password2}" required="true"
-                                requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="16"/>
+                                requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField"/>
                     <p:message for="passwordInput2" styleClass="errorMessage"/>
 
                     <p:outputLabel for="companyNameInput" value="#{texts.companyName}" styleClass="label"/>
@@ -39,40 +39,53 @@
 
                     <p:outputLabel for="contactPersonNameInput" value="#{texts.contactPerson}" styleClass="label"/>
                     <p:inputText id="contactPersonNameInput" value="#{userMB.regDTOUser.userDescription.contactPersonName}"
-                                 required="true" requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80"/>
+                                 required="true" requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80" validatorMessage="#{texts.regexpERR}">
+                        <f:validateRegex pattern="[a-zA-Zа-яА-Я 0-9,!?.]*"/>
+                    </p:inputText>
                     <p:message for="contactPersonNameInput" styleClass="errorMessage"/>
 
                     <p:outputLabel for="phoneInput" value="#{texts.phone}" styleClass="label"/>
-                    <p:inputText id="phoneInput" value="#{userMB.regDTOUser.userDescription.phone}" required="true"
-                                 requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80"/>
+
+                    <p:inputMask id="phoneInput" value="#{userMB.regDTOUser.userDescription.phone}" required="true"
+                                 requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80" mask="(999) 99-99-999">
+                    </p:inputMask>
                     <p:message for="phoneInput" styleClass="errorMessage"/>
 
                     <p:outputLabel for="countryInput" value="#{texts.country}" styleClass="label"/>
                     <p:inputText id="countryInput" value="#{userMB.regDTOUser.userDescription.address.country}"
                                  required="true" styleClass="inputField"
-                                 requiredMessage="#{texts.emptyFieldERR}" maxlength="80"/>
+                                 requiredMessage="#{texts.emptyFieldERR}" maxlength="80" validatorMessage="#{texts.regexpERR}">
+                        <f:validateRegex pattern="[a-zA-Zа-яА-Я 0-9,!?.]*"/>
+                    </p:inputText>
                     <p:message for="countryInput" styleClass="errorMessage"/>
 
                     <p:outputLabel for="cityInput" value="#{texts.city}" styleClass="label"/>
                     <p:inputText id="cityInput" value="#{userMB.regDTOUser.userDescription.address.city}" required="true"
-                                 requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80"/>
+                                 requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80" validatorMessage="#{texts.regexpERR}">
+                        <f:validateRegex pattern="[a-zA-Zа-яА-Я 0-9,!?.]*"/>
+                    </p:inputText>
                     <p:message for="cityInput" styleClass="errorMessage"/>
 
                     <p:outputLabel for="streetInput" value="#{texts.street}" styleClass="label"/>
                     <p:inputText id="streetInput" value="#{userMB.regDTOUser.userDescription.address.street}" required="true"
-                                 requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80"/>
+                                 requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80" validatorMessage="#{texts.regexpERR}">
+                        <f:validateRegex pattern="[a-zA-Zа-яА-Я 0-9,!?.]*"/>
+                    </p:inputText>
                     <p:message for="streetInput" styleClass="errorMessage"/>
 
                     <p:outputLabel for="buildingInput" value="#{texts.building}" styleClass="label"/>
                     <p:inputText id="buildingInput" value="#{userMB.regDTOUser.userDescription.address.building}"
                                  required="true"
-                                 requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80"/>
+                                 requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="80" validatorMessage="#{texts.regexpERR}">
+                        <f:validateRegex pattern="[a-zA-Zа-яА-Я 0-9,!?.]*"/>
+                    </p:inputText>
                     <p:message for="buildingInput" styleClass="errorMessage"/>
                 </h:panelGrid>
                 <div class="centeredDiv">
                     <p:outputLabel for="detailsInput" value="#{texts.details}" styleClass="label"/><br/>
                     <p:inputTextarea id="detailsInput" value="#{userMB.regDTOUser.userDescription.details}" rows="5"
-                                     cols="60" autoResize="false"/>
+                                     cols="60" scrollHeight="0"  maxlength="160"/>
+                    <p:message for="detailsInput" styleClass="errorMessage"/>
                 </div>
                 <p:commandButton id="registerButton" value="#{texts.register}" action="#{userMB.doRegister()}"
                                  update="registerForm"  styleClass="button"/>

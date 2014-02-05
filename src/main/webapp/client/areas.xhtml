@@ -10,11 +10,14 @@
 <h:body>
     <ui:composition template="/WEB-INF/templates/template.xhtml">
         <ui:define name="content">
-        <h:form styleClass="centeredDiv">
+        <h:form id="searchForm" styleClass="centeredDivSmall">
+            <h:panelGrid columns="3">
                 <p:outputLabel for="inputAreaNumber" value="#{texts.areaNumber}" styleClass="label"/>
                 <p:inputText id="inputAreaNumber" value="#{areasMB.areaNumber}" styleClass="inputField" maxlength="16">
-                    <p:ajax event="keyup" update=":viewDataTable" />
+                    <p:ajax event="keyup" update=":searchForm:inputAreaNumberMessage,:viewDataTable"/>
                 </p:inputText>
+                <p:message id="inputAreaNumberMessage" for="inputAreaNumber"/>
+            </h:panelGrid>
         </h:form>
         <p:dataTable id="viewDataTable" styleClass="centeredTable" var="area" value="#{areasMB.dataModel}" paginator="true" rows="5"
                      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

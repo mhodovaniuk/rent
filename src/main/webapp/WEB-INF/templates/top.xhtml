@@ -30,17 +30,17 @@
                         <h:link value="#{texts.register}" outcome="/register"/>
                     </c:when>
                     <c:when test="#{request.userPrincipal ne null}">
-                        <h:outputFormat value="#{texts.hello}">
-                            <f:param value="#{userMB.user.email}"/>
+                        <h:outputFormat value="#{texts.hello}" styleClass="label">
+                            <f:param value="#{userMB.user.email}" />
                         </h:outputFormat>
                         <br/>
-                        <h:outputFormat value="#{texts.cartInfo}" id="cartDisplay">
+                        <h:outputFormat value="#{texts.cartInfo}" id="cartDisplay" styleClass="label">
                             <f:param value="#{cartMB.order.orderParts.size()}"/>
                         </h:outputFormat>
-                        <h:form>
+                        <h:form styleClass="label">
                             <p:commandButton id="goToCart" value="#{texts.doRent}" action="cart" disabled="#{cartMB.order.orderParts.size()==0}"/>
                         </h:form>
-                        <h:form>
+                        <h:form styleClass="label">
                             <p:commandLink value="#{texts.logout}" action="#{userMB.doLogout()}"/>
                         </h:form>
                     </c:when>

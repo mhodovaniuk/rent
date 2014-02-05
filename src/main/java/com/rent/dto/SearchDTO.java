@@ -28,7 +28,7 @@ public class SearchDTO {
     }
 
     public Integer getRealToFloor(){
-        if (toFloor == null || toFloor ==0)
+        if (toFloor == null || toFloor==0)
             return MAX_FLOOR;
         return toFloor;
     }
@@ -44,7 +44,7 @@ public class SearchDTO {
     }
 
     public Double getRealToSquare(){
-        if (toSquare == null || Math.abs(toSquare) < 0.001)
+        if (toSquare == null || toSquare.equals(0D))
             return MAX_SQUARE;
         return toSquare;
     }
@@ -89,7 +89,7 @@ public class SearchDTO {
     }
 
     public BigDecimal getRealToRent() {
-        if (toRent == null || toRent.intValue() == 0)
+        if (toRent == null || toRent.equals(BigDecimal.ZERO))
             return MAX_RENT;
         return toRent;
     }

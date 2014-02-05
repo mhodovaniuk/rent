@@ -18,11 +18,15 @@ public class MyDateConverter implements Converter{
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {
-            return MyDateUtil.stringToDate(s);
+        if (s==null || s.trim().equals(""))
+            return null;
+        return MyDateUtil.stringToDate(s);
     }
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object o) {
+        if(o==null)
+            return "";
             return MyDateUtil.dateToString(o);
     }
 }

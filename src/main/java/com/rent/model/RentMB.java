@@ -77,7 +77,6 @@ public class RentMB implements Serializable {
         }
     }
     public void doChooseArea(Area area) {
-        //System.out.println(area);
         orderPart.setArea(area);
     }
 
