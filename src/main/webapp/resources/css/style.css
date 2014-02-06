@@ -5,32 +5,32 @@
     background-color: rgba(77, 155, 240, 0.24);
 }
 
-#footer{
+#footer {
     min-height: 40px;
     width: 1600px;
     height: 40px;
 }
 
-#footerDiv{
+#footerDiv {
     font-size: 2em;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 100px;
 
-
 }
 
 #inputAddPayment {
     padding: 5px;
 }
-#buttonAddPayment{
+
+#buttonAddPayment {
     padding: 5px;
 }
 
-html, body{
-    padding:0;
-    margin:0;
+html, body {
+    padding: 0;
+    margin: 0;
     height: 100%;
     min-height: 100%;
 }
@@ -41,7 +41,6 @@ body {
     position: relative;
 }
 
-
 #topMenu {
     display: table;
     width: 75%;
@@ -49,7 +48,7 @@ body {
     border-spacing: 10px 10px;
 }
 
-.menuButton{
+.menuButton {
     text-align: center;
     display: table-cell;
     padding: 10px;
@@ -79,115 +78,131 @@ body {
     padding-left: 25px;
 }
 
-#logoDiv, #phoneDiv, #languageDiv, #userDiv{
+#logoDiv, #phoneDiv, #languageDiv, #userDiv {
     vertical-align: middle;
     display: table-cell;
 }
-#topContainer{
+
+#topContainer {
     margin: 0 auto;
     display: table;
 }
 
-.centeredDiv{
+.centeredDiv {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
-.button{
+
+.button {
     text-align: right;
     margin-top: 5px;
     margin-left: 5px;
     margin-bottom: 20px;
 }
 
-.leftButton{
+.leftButton {
     text-align: right;
     margin-left: 5%;
     margin-top: 10px;
     margin-bottom: 20px;
 }
 
-
-.form{
+.form {
     width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
 
-#rentSearch{
+#rentSearch {
     width: 1000px;
     margin: 0 auto;
 }
-.searchRentButton{
+
+.searchRentButton {
     margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 20px;
 }
-.table{
+
+.table {
     display: table-cell;
     vertical-align: top;
     padding: 10px;
 }
-.buttonInsideTable{
+
+.buttonInsideTable {
     margin-left: auto;
     margin-right: auto;
 }
-.label{
+
+.label {
     margin-left: 5px;
     margin-bottom: 5px;
 }
-.inputField{
+
+.inputField {
     margin-left: 5px;
     margin-bottom: 5px;
     width: 10em;
 }
-.centeredMsg{
+
+.centeredMsg {
     text-align: center;
 }
-#content{
+
+#content {
     min-height: 600px;
     margin: 0 auto;
 }
 
-.centeredTable{
+.centeredTable {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
+
 .centeredTable td {
-    text-align:center;
+    text-align: center;
 }
+
 .table td {
-    text-align:center;
+    text-align: center;
 }
-.inputSpinnerField{
+
+.inputSpinnerField {
     margin: 5px;
 }
-.inputAddPayment{
+
+.inputAddPayment {
     width: 100%;
 }
-.emptyDiv{
+
+.emptyDiv {
     width: 100px;
 }
 
-.buttonAddPayment{
+.buttonAddPayment {
     margin-left: 10px;
 }
 
-#addPayment, td{
+#addPayment, td {
     padding: 5px;
 }
-#emailSpan{
+
+#emailSpan {
     font-weight: bold;
 }
-.centeredDivSmall{
+
+.centeredDivSmall {
     width: 40%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
-.selected{
+
+.selected {
     color: red;
 }
