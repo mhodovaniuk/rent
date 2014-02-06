@@ -5,6 +5,8 @@ import com.rent.dto.SearchDTO;
 import com.rent.entity.Area;
 import com.rent.entity.OrderPart;
 import com.rent.utils.I18nBundleUtil;
+import com.rent.utils.MyDateUtil;
+import org.hibernate.exception.DataException;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
@@ -16,6 +18,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -77,11 +80,16 @@ public class RentMB implements Serializable {
         }
     }
     public void doChooseArea(Area area) {
+        orderPart=new OrderPart();
         orderPart.setArea(area);
+        System.out.println("new op");
     }
 
     public void doAddOrderPartToCart(){
-        cartMB.doVerifyAndAddOrderPart(orderPart);
-        orderPart=new OrderPart();
+        boolean addedStatus=cartMB.doVerifyAndAddOrderPart(orderPart);
+    }
+
+    public String getToday() {
+        return MyDateUtil.dateToString(new Date());
     }
 }

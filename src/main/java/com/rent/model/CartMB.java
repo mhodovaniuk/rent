@@ -53,9 +53,8 @@ public class CartMB implements Serializable {
     }
 
 
-    public void doVerifyAndAddOrderPart(OrderPart orderPart) {
+    public boolean doVerifyAndAddOrderPart(OrderPart orderPart) {
         orderPart.setOrder(order);
-        System.out.println(orderPart.getArea());
         RequestContext requestContext = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         boolean addedStatus = true;
@@ -65,12 +64,7 @@ public class CartMB implements Serializable {
         String error = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("warning");
         String warning = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("error");
         String orderPartLenERR = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("orderPartLenERR");
-        String requiredERR= I18nBundleUtil.get("emptyFieldERR",FacesContext.getCurrentInstance().getViewRoot().getLocale());
-        if ( orderPart.getStartDate()==null || orderPart.getEndDate()==null){
-            msg=new FacesMessage(FacesMessage.SEVERITY_ERROR,error,requiredERR);
-            addedStatus=false;
-        }
-        if (addedStatus && orderContainsArea(orderPart.getArea())) {
+        if (orderContainsArea(orderPart.getArea())) {
             addedStatus = false;
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, error, areaInCartERR);
         }
@@ -80,7 +74,7 @@ public class CartMB implements Serializable {
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, warning, datesERR);
         }
 
-        if (addedStatus && addedStatus && MyDateUtil.monthsDiff(orderPart.getStartDate(), orderPart.getEndDate()) < 3) {
+        if (addedStatus && MyDateUtil.monthsDiff(orderPart.getStartDate(), orderPart.getEndDate()) < 3) {
             addedStatus = false;
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, warning, orderPartLenERR);
         }
@@ -91,6 +85,7 @@ public class CartMB implements Serializable {
         }
         FacesContext.getCurrentInstance().addMessage(null, msg);
         requestContext.addCallbackParam("addedStatus", addedStatus);
+        return addedStatus;
     }
 
     private boolean orderContainsArea(Area area) {

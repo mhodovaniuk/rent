@@ -72,7 +72,7 @@
                     </h:panelGrid>
                     <p:commandButton id="okButton" value="#{texts.add}"
                                      actionListener="#{clientCabinetMB.doVerifyAndAddPayment()}"
-                                     oncomplete="handleLoginRequest(xhr, status, args)" styleClass="buttonAddPayment"/>
+                                     oncomplete="handleRequest(xhr, status, args)" styleClass="buttonAddPayment"/>
                     <p:commandButton id="cancelButton" value="#{texts.cancel}"
                                      onclick="PF('dlg').hide();" type="button" styleClass="buttonAddPayment"/>
                 </h:form>

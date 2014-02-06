@@ -1,7 +1,7 @@
 function showMessage(){
     alert("Hello World!");
 }
-function handleLoginRequest(xhr, status, args) {
+function handleRequest(xhr, status, args) {
     if(args.validationFailed || !args.addedStatus) {
         PF('dlg').jq.effect("shake", { times:5 }, 100);
     }
