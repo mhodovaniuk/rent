@@ -64,6 +64,7 @@ public class CartMB implements Serializable {
         String error = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("warning");
         String warning = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("error");
         String orderPartLenERR = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("orderPartLenERR");
+        String goToCart=I18nBundleUtil.get("goToCart",FacesContext.getCurrentInstance().getViewRoot().getLocale());
         if (orderContainsArea(orderPart.getArea())) {
             addedStatus = false;
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, error, areaInCartERR);
@@ -81,7 +82,7 @@ public class CartMB implements Serializable {
 
         if (addedStatus) {
             order.getOrderParts().add(orderPart);
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", added);
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, added, goToCart);
         }
         FacesContext.getCurrentInstance().addMessage(null, msg);
         requestContext.addCallbackParam("addedStatus", addedStatus);

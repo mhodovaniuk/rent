@@ -28,6 +28,9 @@
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </h:outputText>
                     </p:column>
+                    <p:column headerText="#{texts.details}">
+                        <h:outputText value="#{order.details}"/>
+                    </p:column>
                     <p:column headerText="#{texts.payed}">
                         <h:outputText value="#{clientCabinetMB.getAcceptedPaymentsSum(order)}"/>
                     </p:column>

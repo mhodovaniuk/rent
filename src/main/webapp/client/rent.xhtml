@@ -20,14 +20,14 @@
                                     showOn="button"
                                     pattern="MM/yyyy"  readonlyInput="true" required="true"
                                     requiredMessage="#{texts.emptyFieldERR}" showButtonPanel="true">
-                            <f:converter converterId="myDateConverter"/>
+                            <f:convertDateTime pattern="MM/yyyy"/>
                         </p:calendar>
                         <p:message for="startDateInput"/>
                         <p:outputLabel for="endDateInput" value="#{texts.chooseLastDayOfMonth}"/>
                         <p:calendar id="endDateInput" value="#{rentMB.orderPart.endDate}" showOn="button"
                                     pattern="MM/yyyy" readonlyInput="true" required="true"
                                     requiredMessage="#{texts.emptyFieldERR}" showButtonPanel="true">
-                            <f:converter converterId="myDateConverter"/>
+                            <f:convertDateTime pattern="MM/yyyy"/>
                         </p:calendar>
                         <p:message for="endDateInput"/>
                     </h:panelGrid>
