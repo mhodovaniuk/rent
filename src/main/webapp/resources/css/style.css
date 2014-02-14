@@ -97,7 +97,7 @@ body {
 
 .button {
     text-align: right;
-    margin-top: 5px;
+    margin-top: 10px;
     margin-left: 5px;
     margin-bottom: 20px;
 }
@@ -205,4 +205,13 @@ body {
 
 .selected {
     color: red;
+}
+.centeredForm{
+    width: 80%;
+    margin: auto;
+}
+
+.cabinetTable{
+
+    text-align: center;
 }

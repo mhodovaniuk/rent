@@ -51,7 +51,10 @@
             <div class="centeredDiv">
                 <p:outputLabel for="detailsInput" value="#{texts.details}" styleClass="label"/><br/>
                 <p:inputTextarea id="detailsInput" value="#{cartMB.order.details}" rows="5"
-                                 cols="60" maxlength="160"/>
+                                 cols="60" maxlength="160">
+                    <f:validator validatorId="detailsValidator"/>
+                                 </p:inputTextarea><br/>
+                <p:message for="detailsInput"/>
             </div>
             <p:commandButton value="#{texts.doRent}" action="#{cartMB.doCompleteOrder()}" styleClass="leftButton"/>
 

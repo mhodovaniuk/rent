@@ -21,14 +21,14 @@
 
                     <p:outputLabel for="passwordInput" value="#{texts.password}" styleClass="label"/>
                     <p:password id="passwordInput" value="#{userMB.regDTOUser.password}" required="true"
-                                requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField">
+                                requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField" maxlength="30">
                         <f:validator validatorId="passwordValidator" />
                         <f:attribute name="password2" value="#{password2}"/>
                     </p:password>
                     <p:message for="passwordInput" styleClass="errorMessage"/>
 
                     <p:outputLabel for="passwordInput2" value="#{texts.passwordConfirm}" styleClass="label"/>
-                    <p:password id="passwordInput2" binding="#{password2}" required="true"
+                    <p:password id="passwordInput2" binding="#{password2}" required="true" maxlength="30"
                                 requiredMessage="#{texts.emptyFieldERR}" styleClass="inputField"/>
                     <p:message for="passwordInput2" styleClass="errorMessage"/>
 
@@ -84,7 +84,9 @@
                 <div class="centeredDiv">
                     <p:outputLabel for="detailsInput" value="#{texts.details}" styleClass="label"/><br/>
                     <p:inputTextarea id="detailsInput" value="#{userMB.regDTOUser.userDescription.details}" rows="5"
-                                     cols="60" scrollHeight="0"  maxlength="160"/>
+                                     cols="60" scrollHeight="0"  maxlength="160">
+                        <f:validator validatorId="detailsValidator"/>
+                                     </p:inputTextarea><br/>
                     <p:message for="detailsInput" styleClass="errorMessage"/>
                 </div>
                 <p:commandButton id="registerButton" value="#{texts.register}" action="#{userMB.doRegister()}"

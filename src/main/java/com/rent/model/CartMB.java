@@ -1,6 +1,7 @@
 package com.rent.model;
 
 
+import com.rent.dao.AreaDAO;
 import com.rent.dao.OrderDAO;
 import com.rent.entity.Area;
 import com.rent.entity.Order;
@@ -19,8 +20,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by mykhailo on 1/4/14.
@@ -31,6 +31,8 @@ public class CartMB implements Serializable {
     //fields
     @EJB
     private OrderDAO orderDAO;
+    @EJB
+    private AreaDAO areaDAO;
     @Inject
     private UserMB userMB;
 
@@ -61,11 +63,11 @@ public class CartMB implements Serializable {
         String areaInCartERR = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("areaInCartERR");
         String datesERR = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("datesERR");
         String added = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("addedArea");
-        String error = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("warning");
-        String warning = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("error");
+        String error = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("error");
+        String warning = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("warning");
         String orderPartLenERR = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("orderPartLenERR");
         String goToCart=I18nBundleUtil.get("goToCart",FacesContext.getCurrentInstance().getViewRoot().getLocale());
-        if (orderContainsArea(orderPart.getArea())) {
+        if ( orderContainsArea(orderPart.getArea())) {
             addedStatus = false;
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, error, areaInCartERR);
         }
@@ -84,6 +86,7 @@ public class CartMB implements Serializable {
             order.getOrderParts().add(orderPart);
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, added, goToCart);
         }
+
         FacesContext.getCurrentInstance().addMessage(null, msg);
         requestContext.addCallbackParam("addedStatus", addedStatus);
         return addedStatus;
@@ -106,7 +109,22 @@ public class CartMB implements Serializable {
         FacesMessage msg = null;
         String msgStr = null;
         FacesMessage.Severity severity = null;
-
+        String removeAreas=I18nBundleUtil.get("removeAreas",FacesContext.getCurrentInstance().getViewRoot().getLocale());
+        String error = ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("error");
+        ArrayList<String> areasList=new ArrayList<String>();
+        for (OrderPart p:order.getOrderParts())
+            if (!areaDAO.isAreaFree(p.getArea().getId(),p.getStartDate(),p.getEndDate()))
+                areasList.add(p.getArea().getNumber());
+        if (areasList.size()!=0){
+            removeAreas+=areasList.get(0);
+            for (int i = 1; i < areasList.size(); i++) {
+                removeAreas+=", "+areasList.get(i);
+            }
+            msg=new FacesMessage(FacesMessage.SEVERITY_WARN,error,removeAreas);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+            return "cart";
+        }
         if (order.getOrderParts().size() != 0) {
             msgStr= ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("orderAdded");
             severity=FacesMessage.SEVERITY_INFO;

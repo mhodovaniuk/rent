@@ -9,11 +9,11 @@
 <h:body>
     <ui:composition template="/WEB-INF/templates/template.xhtml">
         <ui:define name="content">
-            <h:form id="adminCabinetForm">
-                <p:dataTable var="payment" value="#{adminCabinetMB.notAcceptedPayments}" paginator="true" rows="5"
+            <h:form id="adminCabinetForm" styleClass="centeredForm" >
+                <p:dataTable var="payment" value="#{adminCabinetMB.notAcceptedPayments}" paginator="true" rows="5" styleClass="cabinetTable"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15" emptyMessage="#{texts.emptyDataTable}">
-                    <p:column headerText="#{texts.id}">
+                    <p:column headerText="#{texts.paymentId}">
                         <h:outputText value="#{payment.visibleID}"/>
                     </p:column>
                     <p:column headerText="#{texts.date}">
@@ -35,8 +35,8 @@
                         <p:selectBooleanCheckbox value="#{payment.accepted}"/>
                     </p:column>
                 </p:dataTable>
-                <p:commandButton value="#{texts.update}" actionListener="#{adminCabinetMB.acceptPayments}"
-                                 update="adminCabinetForm"/>
+                <p:commandButton value="#{texts.update}" actionListener="#{adminCabinetMB.acceptPayments}" styleClass="button"
+                                 update="adminCabinetForm" />
             </h:form>
         </ui:define>
     </ui:composition>

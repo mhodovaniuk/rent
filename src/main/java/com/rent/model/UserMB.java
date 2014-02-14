@@ -111,6 +111,7 @@ public class UserMB implements Serializable {
         } catch (ServletException e) {
             String messageText= ResourceBundle.getBundle("i18n/texts", FacesContext.getCurrentInstance().getViewRoot().getLocale()).getString("loginERR");
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"",messageText));
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
             userPassword=null;
             return "login";
         }
@@ -121,6 +122,7 @@ public class UserMB implements Serializable {
         HttpServletRequest request = (HttpServletRequest)
                 context.getExternalContext().getRequest();
         try {
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
             request.logout();
             user=null;
             return "login";

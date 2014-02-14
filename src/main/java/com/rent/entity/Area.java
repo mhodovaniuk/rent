@@ -20,7 +20,8 @@ import java.math.BigDecimal;
     @NamedQuery(name="Area.finLastRentDate",query="select max(p.endDate) from OrderPart p where p.area.id=:areaId and p.endDate>current_date"),
     @NamedQuery(name="Area.findAvailableAreasCount",query="select count(a) from Area a where not exists(select p from OrderPart p where p.area.id=a.id and CURRENT_DATE < p.endDate)"),
     @NamedQuery(name="Area.findAreasCount",query="select count(a) from Area a"),
-    @NamedQuery(name="Area.findSearchedAreasCount",query="select count(a) from Area a where a.floor>=:fromFloor and a.floor<=:toFloor and a.square>=:fromSquare and a.square<=:toSquare and a.rent>=:fromRent and a.rent<=:toRent and (a.airCondition=:aircondition or :aircondition is NULL) and not exists(select p from OrderPart p where p.area.id=a.id and CURRENT_DATE < p.endDate)")
+    @NamedQuery(name="Area.findSearchedAreasCount",query="select count(a) from Area a where a.floor>=:fromFloor and a.floor<=:toFloor and a.square>=:fromSquare and a.square<=:toSquare and a.rent>=:fromRent and a.rent<=:toRent and (a.airCondition=:aircondition or :aircondition is NULL) and not exists(select p from OrderPart p where p.area.id=a.id and CURRENT_DATE < p.endDate)"),
+    @NamedQuery(name="Area.isFree",query="select count(p) from OrderPart p where p.area.id=:areaId and not (:ed<p.startDate or p.endDate<:sd)")
 })
 
 public class Area implements Serializable {

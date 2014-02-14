@@ -10,7 +10,6 @@
 <h:body>
     <ui:composition template="/WEB-INF/templates/template.xhtml">
         <ui:define name="content">
-
             <h:outputScript library="js" name="dialog.js"/>
             <h:form>
                 <p:dataTable id="ordersDataTable" var="order" value="#{clientCabinetMB.userOrders}" paginator="true"
@@ -20,7 +19,7 @@
                     <f:facet name="header">
                         #{texts.orders}
                     </f:facet>
-                    <p:column headerText="#{texts.id}">
+                    <p:column headerText="#{texts.orderId}">
                         <h:outputText value="#{order.visibleID}"/>
                     </p:column>
                     <p:column headerText="#{texts.createDate}">
@@ -67,23 +66,26 @@
                         <p:outputLabel for="valueInput" value="#{texts.value}"/>
                         <p:spinner id="valueInput" value="#{clientCabinetMB.newPayment.value}" prefix="$" min="0.01"
                                    validatorMessage="#{texts.fieldFormatERR}"
-                                   required="true"
+                                   required="true" max="1000000000"
                                    requiredMessage="#{texts.emptyFieldERR}" stepFactor="0.01" styleClass="inputAddPayment"/>
                         <p:message for="valueInput"/>
                         <p:outputLabel for="details" value="#{texts.details}"/>
-                        <p:inputText id="details" maxlength="128" value="#{clientCabinetMB.newPayment.details}" styleClass="inputAddPayment"/>
+                        <p:inputText id="details" maxlength="128" value="#{clientCabinetMB.newPayment.details}" styleClass="inputAddPayment">
+                            <f:validator validatorId="detailsValidator"/>
+                        </p:inputText>
+                        <p:message for="details"/>
                     </h:panelGrid>
                     <p:commandButton id="okButton" value="#{texts.add}"
-                                     actionListener="#{clientCabinetMB.doVerifyAndAddPayment()}"
+                                     actionListener="#{clientCabinetMB.doVerifyAndAddPayment()}" update="addPaymentFormID"
                                      oncomplete="handleRequest(xhr, status, args)" styleClass="buttonAddPayment"/>
-                    <p:commandButton id="cancelButton" value="#{texts.cancel}"
+                    <p:commandButton id="cancelButton" value="#{texts.cancel}" update="addPaymentFormID"
                                      onclick="PF('dlg').hide();" type="button" styleClass="buttonAddPayment"/>
                 </h:form>
 
             </p:dialog>
 
             <p:dialog id="orderDetailsID" header="#{texts.details}" widgetVar="orderDetailsDLG" modal="true"
-                      resizable="false">
+                      resizable="false" width="1000">
 
                 <p:dataTable id="orderPartsDataTable" styleClass="table"
                              value="#{clientCabinetMB.selectedOrder.orderParts}" var="part" paginator="true" rows="5"
@@ -92,7 +94,7 @@
                     <f:facet name="header">
                         #{texts.orderPart}
                     </f:facet>
-                    <p:column headerText="#{texts.id}">
+                    <p:column headerText="#{texts.orderPartId}">
                         <h:outputText value="#{part.visibleID}"/>
                     </p:column>
                     <p:column headerText="#{texts.areaNumber}">
@@ -119,7 +121,7 @@
                     <f:facet name="header">
                         #{texts.payment}
                     </f:facet>
-                    <p:column headerText="#{texts.id}">
+                    <p:column headerText="#{texts.paymentId}">
                         <h:outputText value="#{payment.visibleID}"/>
                     </p:column>
                     <p:column headerText="#{texts.value}">

@@ -59,13 +59,13 @@
                     <h:panelGroup id="rentInput">
                         <p:spinner id="fromRentInput" value="#{rentMB.searchDTO.fromRent}"
                                    styleClass="inputSpinnerField" size="7" min="0" max="100000" stepFactor="0.1"
-                                   maxlength="11">
+                                   maxlength="11" prefix="$">
                             <f:converter converterId="javax.faces.BigDecimal"/>
                         </p:spinner>
                         <p:watermark value="#{texts.from}" for="fromRentInput"/>
                         <h:outputText value="-"/>
                         <p:spinner id="toRentInput" value="#{rentMB.searchDTO.toRent}" styleClass="inputSpinnerField"
-                                   size="7" min="0" max="100000" stepFactor="0.1" maxlength="11">
+                                   size="7" min="0" max="100000" stepFactor="0.1" maxlength="11" prefix="$">
                             <f:converter converterId="javax.faces.BigDecimal"/>
                         </p:spinner>
                         <p:watermark value="#{texts.to}" for="toRentInput"/>

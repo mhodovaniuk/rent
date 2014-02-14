@@ -76,4 +76,10 @@ public class AreaDAO extends BaseDAO<Area> {
                 .setParameter("fromRent", dto.getRealFromRent()).setParameter("toRent", dto.getRealToRent())
                 .setParameter("aircondition", dto.getRealAircondition()).getSingleResult().intValue();
     }
+
+    public boolean isAreaFree(Long id, Date startDate, Date endDate) {
+        TypedQuery<Long> query=em.createNamedQuery("Area.isFree",Long.class);
+        boolean res= query.setParameter("areaId",id).setParameter("sd",startDate).setParameter("ed",endDate).getSingleResult()==0;
+        return res;
+    }
 }
